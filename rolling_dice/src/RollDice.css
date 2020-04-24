@@ -1,0 +1,35 @@
+.RollDice {
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
+}
+.RollDice-container {
+    margin-top: 25vh;
+    margin-bottom: 5vh;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+.RollDice button {
+    align-self: center;
+    width: 15em;
+    padding: 1.5em;
+    border: 0px;
+    border-radius: 10px;
+    color: whitesmoke;
+    background-color: #1b303d;
+    outline: none;
+    box-shadow: 3px 4px 3px rgba(0, 0, 0, 0.6);
+}
+
+.RollDice button:hover {
+    transition-duration: 200ms;
+    background-color: #031927;
+    perspective: 500px;
+    cursor: pointer;
+}
+
+.RollDice button:active {
+    transition-duration: 200ms;
+    box-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5);
+}
