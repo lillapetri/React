@@ -1,0 +1,21 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #030534;
+  color: #F2F2F2;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1 {
+  font-family: 'Bangers', cursive;
+}

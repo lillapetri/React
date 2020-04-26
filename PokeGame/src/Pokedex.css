@@ -1,0 +1,38 @@
+.Pokedex {
+    text-align: center;
+}
+
+.Pokedex-cards {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.Pokedex-winner {
+    color: green;
+    animation: 1100ms pulse 1;
+    animation-fill-mode: forwards;
+    transition-timing-function: ease;
+}
+
+@keyframes pulse {
+    0% {
+        filter: brightness(0.8);
+    }
+    30% {
+        transform: scale(2);
+        filter: brightness(1.5);
+    }
+    70% {
+        transform: scale(1.5);
+        filter: brightness(0.8);
+    }
+    100% {
+        transform: scale(2);
+        filter: brightness(1.7);
+    }
+}
+
+.Pokedex-loser {
+    color: #E3350D;
+}
