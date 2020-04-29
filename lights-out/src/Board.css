@@ -1,0 +1,104 @@
+.Board {
+  cursor: pointer;
+  margin: 0 auto;
+  border-radius: 10px;
+  /* box-shadow: 10px 10px 0 red; */
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.548), -10px 0 80px rgba(247, 0, 255, 0.637), 10px 0 80px rgba(0, 225, 255, 0.527);
+}
+
+table tr:first-child td:first-child {
+  border-radius: 10px 0 0 0 !important;
+}
+table tr:first-child td:last-child {
+  border-radius: 0 10px 0 0 !important;
+}
+table tr:last-child td:first-child {
+  border-radius: 0 0 0 10px !important;
+}
+table tr:last-child td:last-child {
+  border-radius: 0 0 10px 0 !important;
+}
+
+@font-face {
+  font-family: neon;
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
+}
+
+.Board-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2.5rem;
+}
+
+.neon-orange {
+  font-family: neon;
+  color: #fb4264;
+  font-size: 80px;
+  text-shadow: 0 0 3vw #f40a3554;
+  animation: neon-orange 0.9s ease-in-out infinite;
+  -moz-animation: neon-orange 0.9s ease-in-out infinite;
+  -webkit-animation: neon-orange 0.9s ease-in-out infinite;
+}
+
+.neon-blue {
+  font-family: neon;
+  color: #426dfb;
+  font-size: 80px;
+  text-shadow: 0 0 3vw #2356ff;
+  animation: neon-blue 2s linear infinite;
+  -moz-animation: neon-blue 2s linear infinite;
+  -webkit-animation: neon-blue 2s linear infinite;
+  -o-animation: neon-blue 2s linear infinite;
+}
+
+.winner .neon-blue,
+.winner .neon-orange {
+  font-size: 100px;
+}
+
+.newGame {
+  margin: 30px auto;
+  width: fit-content;
+  font-size: 30px;
+  color: #2356ff;
+  cursor: pointer;
+  transition-duration: 100ms;
+  transition-timing-function: ease;
+}
+
+.newGame:hover {
+  filter: brightness(1.4);
+  text-shadow: 0 0 1px #8016fa3a, 0 0 3px #8016fadf, 0 0 10px #8016fadf,
+    0 0 10px #8016fa28, 0 0 0.4px #ff00ff, 0.5px 0.5px 0.1px #ff00ff;
+  color: #ff15ff;
+}
+
+
+@keyframes neon-orange {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #8016fa3a, 0 0 3vw #8016fadf, 0 0 10vw #8016fadf,
+      0 0 10vw #8016fa28, 0 0 0.4vw #ff00ff, 0.5vw 0.5vw 0.1vw #ff00ff;
+    color: #ff15ff;
+  }
+  50% {
+    text-shadow: 0 0 0.3vw #3906749f, 0 0 1.5vw #3906749f, 0 0 5vw #39067454,
+      0 0 5vw #3906749f, 0 0 0.2vw #39067457, 0.5vw 0.5vw 0.1vw#ff009d;
+    color: #ff009d;
+  }
+}
+
+@keyframes neon-blue {
+  0%,
+  100% {
+    text-shadow: 0 0 1vw #1041ff, 0 0 2vw #1041ff, 0 0 6vw #1041ff,
+      0 0 10vw #1041ff, 0 0 0.4vw #8bfdfe, 0.5vw 0.5vw 0.1vw #147280;
+    color: #28d7fe;
+  }
+  50% {
+    text-shadow: 0 0 0.5vw #082180, 0 0 1.5vw #082180, 0 0 3vw #082180,
+      0 0 5vw #082180, 0 0 0.2vw #082180, 0.5vw 0.5vw 0.1vw #0a3940;
+    color: #146c80;
+  }
+}
