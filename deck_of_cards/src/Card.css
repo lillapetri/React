@@ -1,0 +1,7 @@
+.Card {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 5vh auto;
+    filter: sepia(0.15) drop-shadow(10px 20px 2px rgba(39, 14, 1, 0.28));
+}
