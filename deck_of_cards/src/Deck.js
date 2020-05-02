@@ -22,7 +22,7 @@ class Deck extends Component {
             // make request using deck_id
             let cardRes = await axios.get(cardUrl);
             if(!cardRes.data.success){
-                throw new Error("No card remaining!")
+                throw new Error("No card remaining! Refresh the page.")
             }
             // set state using new card info from API
             let card = cardRes.data.cards[0];
