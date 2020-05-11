@@ -1,0 +1,107 @@
+.Game {
+  width: max-content;
+  background: azure;
+  box-shadow: 0 19px 18px rgba(0, 0, 0, 0.3), 0 15px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  zoom: 0.9;
+  border-radius: 3px;
+}
+h2 {
+  color: #0e0424ce;
+  font-weight: 300;
+  font-size: 2em;
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2), 2px 3px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #35046d;
+  display: inline-block;
+  margin: .5rem auto 1rem auto;
+  letter-spacing: 1px;
+}
+.Game-dice-section {
+  width: max-content;
+  padding: 0 4rem;
+  margin: 0 auto;
+}
+
+.Game-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Game-reroll {
+  font-size: 1.4rem;
+  padding: .5rem 1rem;
+  letter-spacing: 1px;
+  color: azure;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Roboto';
+  font-weight: 300;
+  transition: 0.3s;
+  background-size: 200% auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2), 0 8px 12px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(
+    to right,
+    #170444 0%,
+    #371586 51%,
+    #0e002e 100%
+  );
+  border-radius: 5px;
+  border: none;
+  width: auto;
+
+  margin-bottom: 1.5rem;
+}
+
+.Game-reroll:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+  background-position: right center;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3), 0 10px 12px rgba(0, 0, 0, 0.2);
+}
+
+.Game-reroll:active {
+  transform: translateY(0px);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.Game-reroll:active,
+.Game-reroll:focus {
+  outline: none;
+}
+
+.Game-reroll:disabled {
+  background-color: azure;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.Game-description {
+  font-style: italic;
+  color: azure;
+}
+
+.Game-header {
+  width: 100%;
+  margin: 0 auto;
+  background: linear-gradient(-45deg, #025599, #06df9e 51%, #1f7a96);
+  background-size: 300% 200%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite;
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

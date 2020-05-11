@@ -1,0 +1,15 @@
+html {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding-top: 1rem;
+  font-family: "Roboto";
+  font-weight: 400;
+  height: 100%;
+  background: linear-gradient(to right, #91c2eab8, #b7c7e6b8, #8570d1b8);
+}

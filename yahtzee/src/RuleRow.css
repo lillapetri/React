@@ -1,0 +1,35 @@
+.RuleRow {
+  transition: all 0.2s;
+}
+.RuleRow-active:hover {
+  cursor: pointer;
+  background: rgba(227, 242, 253, 0.8);
+}
+
+.RuleRow-disabled td:first-child {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.RuleRow-disabled:hover {
+  cursor: not-allowed;
+}
+
+.RuleRow td {
+  padding: 0.3rem;
+  border-bottom: solid 1px black;
+  font-size: .9rem;
+}
+
+.RuleRow-name {
+  text-align: left;
+}
+
+.RuleRow-description {
+  text-align: right;
+  opacity: 0.7;
+}
+
+.RuleRow-score {
+  text-align: right;
+}

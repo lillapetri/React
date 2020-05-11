@@ -1,0 +1,11 @@
+.Dice {
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.Dice:not(:last-child) {
+  padding-right: 1.5rem;
+}
