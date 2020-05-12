@@ -1,0 +1,8 @@
+import React from 'react'
+
+function Header () {
+    return(<div className="Header">Keeper</div>)
+}
+
+
+export default Header;
