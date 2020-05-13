@@ -5,10 +5,11 @@
     display: inline-block;
     position: relative;
     cursor: pointer;
-    margin-bottom: -3.5px;
+    margin-bottom: -3.9px;
 }
 
 .copy-button {
+    cursor: pointer;
     width: 100px;
     height: 30px;
     position: absolute;
