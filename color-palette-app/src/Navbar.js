@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Select from "@material-ui/core/Select";
 import Slider from 'rc-slider';
 import'rc-slider/assets/index.css';
@@ -28,7 +29,7 @@ class Navbar extends Component {
         return (
             <header className="Navbar">
                 <div className="logo">
-                    <a href="#">Color palette </a>
+                    <Link to="/">Color palette</Link>
                 </div>
                 <div className="slider-container">
                 <span>Level: {level}</span>
