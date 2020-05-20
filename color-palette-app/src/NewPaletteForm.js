@@ -133,7 +133,7 @@ class NewPaletteForm extends Component {
                 onClick={this.addRandomColor}
                 disabled={paletteIsFull}
               >
-                Random Color
+                Random 
               </Button>
             </div>
             <ColorPickerForm
