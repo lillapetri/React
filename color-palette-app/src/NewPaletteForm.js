@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -15,7 +15,7 @@ import { Typography } from '@material-ui/core';
 
 const drawerWidth = 400;
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
   root: {
     display: 'flex',
   },
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(),
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -70,73 +70,105 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-}));
+});
 
-export default function NewPaletteForm() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+class NewPaletteForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: true,
+      currentColor: 'teal',
+      colors: ['purple', '#e15764']
+    };
+    this.updateCurrentColor = this.updateCurrentColor.bind(this);
+    this.addNewColor = this.addNewColor.bind(this);
+  }
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  handleDrawerOpen = () => {
+    this.setState({open: true});
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
+  handleDrawerClose = () => {
+    this.setState({open: false});
   };
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Typography variant='h4'>Design your palette!</Typography>
-        <div>
-          <Button variant='contained' color='secondary'>Clear palette</Button>
-          <Button variant='contained' color='primary'>Random color</Button>
-        </div>
-        <Divider />
-        <ChromePicker color='purple' onChangeComplete={(newColor) => console.log(newColor)} />
-        <Button variant='contained' color='primary'>Add color</Button>
-      </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-        
-      </main>
-    </div>
-  );
+  updateCurrentColor(newColor){
+    this.setState({currentColor: newColor.hex})
+  };
+
+  addNewColor() {
+    this.setState({colors: [...this.state.colors, this.state.currentColor]})
+  }
+
+  render() {
+    const classes = this.props;
+    const {open} = this.state;
+  
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="relative"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={this.handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <div className={classes.drawerHeader}>
+            <IconButton onClick={this.handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Typography variant='h4'>Design your palette!</Typography>
+          <div>
+            <Button variant='contained' color='secondary'>Clear palette</Button>
+            <Button variant='contained' color='primary'>Random color</Button>
+          </div>
+          <Divider />
+          <ChromePicker color={this.state.currentColor} onChangeComplete={(newColor) => this.updateCurrentColor(newColor)} />
+          <Button 
+          variant='contained' 
+          color='primary' 
+          style={{backgroundColor: this.state.currentColor}}
+          onClick={this.addNewColor}
+          >Add color</Button>
+        </Drawer>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open,
+          })}
+        >
+          <div className={classes.drawerHeader}/>
+            <Typography paragraph>
+            <ul>
+              {this.state.colors.map(color => (
+                <li style={{backgroundColor: color}}>{color}</li>
+              ))}
+            </ul>
+            </Typography>
+        </main>
+      </div>
+    );
+  }
 }
+export default withStyles(styles, {withTheme: true})(NewPaletteForm);
