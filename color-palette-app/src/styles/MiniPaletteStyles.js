@@ -2,7 +2,8 @@ export default {
     root: {
         backgroundColor: "white",
         borderRadius: "5px",
-        border: "1px solid black",
+        border: '1px solid #1A3077',
+        boxShadow: '0 0 1rem rgba(0, 0, 0, .2)',
         padding: "0.5rem",
         position: "relative",
         overflow: "hidden",
@@ -23,7 +24,7 @@ export default {
         justifyContent: "space-between",
         alignItems: "center",
         margin: "0",
-        color: "black",
+        color: "#18003b",
         paddingTop: "0.5rem",
         fontSize:"1rem",
         position: "relative"
