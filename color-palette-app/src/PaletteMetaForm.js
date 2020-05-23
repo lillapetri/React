@@ -39,48 +39,44 @@ class PaletteMetaForm extends Component {
     render() {
         const {newPaletteName} = this.state;
         return (
-          <div>
-            <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-              Open form dialog
-            </Button>
-            <Dialog
-              open={this.state.open}
-              onClose={this.handleClose}
-              aria-labelledby="form-dialog-title"
-            >
-              <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-              <DialogContent>
+        <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="form-dialog-title"
+        >
+            <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+            <ValidatorForm onSubmit={() => this.props.handleSubmit(newPaletteName)}>
+            <DialogContent>
                 <DialogContentText>
-                  To subscribe to this website, please enter your email address here. We will send
-                  updates occasionally.
+                Please enter a name for your palette. Make sure it's unique!
                 </DialogContentText>
-                <ValidatorForm onSubmit={() => this.props.handleSubmit(newPaletteName)}>
+                
                     <TextValidator 
                         label='Palette name' 
                         name='newPaletteName'
                         onChange={this.handleChange} 
+                        fullWidth
+                        margin='normal'
                         value={newPaletteName}
                         validators={['required', 'isPaletteNameUnique']}
                         errorMessages={['Enter a palette name', 'Name already taken']}
                     />
-                    <Button 
+                    
+                
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                Cancel
+                </Button>
+                <Button 
                     variant='contained' 
                     type='submit'
                     color='primary' 
                     >Save palette
                     </Button>
-                </ValidatorForm>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                  Cancel
-                </Button>
-                <Button onClick={this.handleClose} color="primary">
-                  Subscribe
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </div>
+            </DialogActions>
+            </ValidatorForm>
+        </Dialog>
         );
       }
     
