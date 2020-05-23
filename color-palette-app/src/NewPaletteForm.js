@@ -170,7 +170,7 @@ class NewPaletteForm extends Component {
 
     return (
       <div className={classes.root}>
-        <PaletteFormNav handleDrawerOpen={this.handleDrawerOpen} handleSubmit={this.handleSubmit} open={open} classes={classes} palettes={palettes}/>
+        <PaletteFormNav handleDrawerOpen={this.handleDrawerOpen} handleSubmit={this.handleSubmit} open={open} palettes={palettes}/>
         <Drawer
           className={classes.drawer}
           variant='persistent'
