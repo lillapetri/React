@@ -1,8 +1,11 @@
+import sizes from './mediaQueries';
+
 export default {
     Palette: {
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden'
     },    
     colors: {
         height: '95%',
@@ -38,7 +41,20 @@ export default {
             border: 'none',
             textTransform: 'uppercase',
             textDecoration: 'none'
-        }
+        },
+        [sizes.down('lg')]: {
+            width: '25%',
+            height: '33.333333%'
+        },
+        [sizes.down('md')]: {
+            width: '50%',
+            height: '20%'
+        },
+        [sizes.down('xs')]: {
+            width: '100%',
+            height: '10%'
+        },
+        
     }
     
 }

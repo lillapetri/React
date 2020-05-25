@@ -20,11 +20,11 @@ export default {
         },
         [sizes.down('lg')]: {
             width: '25%',
-            height: props => props.showingFullPalette? '20%' : '50%',
+            height: props => props.showingFullPalette? '20%' : '33.33333%',
         },
         [sizes.down('md')]: {
             width: '50%',
-            height: props => props.showingFullPalette? '10%' : '50%',
+            height: props => props.showingFullPalette? '10%' : '20%',
         },
         [sizes.down('xs')]: {
             width: '100%',
@@ -90,9 +90,10 @@ export default {
     },
     copyMessage: {
         position: 'fixed',
-        left: '0',
-        bottom: '20%',
+        top: '0',
+        bottom: '0',
         right: '0',
+        left: '0',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -110,6 +111,9 @@ export default {
             padding: '1rem',
             textAlign: 'center',
             marginBottom: '0',
+            [sizes.down('sm')]: {
+                fontSize: '5rem'
+            },
         },
         '& p': {
             fontSize: '2rem',
