@@ -1,8 +1,11 @@
+import sizes from './mediaQueries';
+
 export default {
     Navbar: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-start',
+        marginLeft: '10px',
         height: '6vh',
     },
     logo: {
@@ -18,11 +21,14 @@ export default {
         '& a': {
             textDecoration: 'none',
             color: 'black',
+        },
+        [sizes.down('sm')]: {
+            display: 'none',
         }
     },
     slider: {
-        width: '340px',
-        margin: '0 10px',
+        width: '43vw',
+        margin: '0 5vh',
         display: 'inline-block',
         '& .rc-slider-track': {backgroundColor: 'transparent'},
         '& .rc-slider-rail': {
@@ -41,6 +47,6 @@ export default {
     },
     selectContainer: {
         marginLeft: 'auto',
-        marginRight: '1rem'
+        marginRight: '1rem',
     }
 }

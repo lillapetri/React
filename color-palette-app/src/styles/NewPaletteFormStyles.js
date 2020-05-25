@@ -1,3 +1,4 @@
+import sizes from './mediaQueries';
 
 const drawerWidth = 400;
 
@@ -39,7 +40,10 @@ const styles = theme => ({
     alignItems: "center",
     padding: "0 8px",
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    [sizes.down('md')]: {
+      fontSIze: '2rem'
+    },
   },
   content: {
     flexGrow: 1,
@@ -75,8 +79,9 @@ const styles = theme => ({
     alignItems: 'center',
   },
   btn: {
-    padding: '10px 20px',
-    boxShadow: 'none'
+    padding: '5px 15px',
+    boxShadow: 'none',
+    
   }
 });
 

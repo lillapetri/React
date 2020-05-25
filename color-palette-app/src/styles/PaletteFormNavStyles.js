@@ -1,4 +1,4 @@
-
+import sizes from './mediaQueries';
 const drawerWidth = 400;
 const styles = theme => ({
   root: {
@@ -27,17 +27,23 @@ const styles = theme => ({
     display: "none"
   },
   menuButton: {
-    marginLeft: 12,
-    marginRight: 20
+    margin: '0 5px',
   },
   navBtns: {
     marginRight: "1rem",
     "& a": {
       textDecoration: "none"
-    }
+    },
+    [sizes.down('xs')]: {
+      marginRight: '5px',
+    },
   },
   button: {
-    margin: "0 0.5rem"
+    margin: "0 0.5rem",
+    [sizes.down('xs')]: {
+      margin: 0,
+      padding: '3px 6px'
+    },
   }
 });
 

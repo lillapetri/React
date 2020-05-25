@@ -1,4 +1,5 @@
 import chroma from 'chroma-js';
+import sizes from './mediaQueries';
 
 const styles = {
     root: {
@@ -10,6 +11,18 @@ const styles = {
         cursor: 'pointer',
         marginBottom: '-6px',
         textTransform: 'uppercase',
+        [sizes.down('lg')]: {
+            width: '25%',
+            height: '20%'
+        },
+        [sizes.down('md')]: {
+            width: '50%',
+            height: '10%'
+        },
+        [sizes.down('sm')]: {
+            width: '100%',
+            height: '5%',
+        }
     }, 
     boxContent: {
         color: props => chroma.contrast(props.color, 'white') < 4.5 ? ' rgba(0, 0, 0, 0.7)' : 'white',
