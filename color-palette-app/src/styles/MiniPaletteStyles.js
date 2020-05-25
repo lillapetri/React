@@ -1,9 +1,10 @@
 export default {
     root: {
         backgroundColor: "white",
-        borderRadius: "5px",
-        border: '1px solid #1A3077',
-        boxShadow: '0 0 1rem rgba(0, 0, 0, .2)',
+        overflow: 'hidden',
+        borderRadius: "3px",
+        border: 'none',
+        boxShadow: '0 0 1.5rem rgba(0, 0, 0, .35)',
         padding: "0.5rem",
         position: "relative",
         overflow: "hidden",
@@ -41,17 +42,15 @@ export default {
         position: "relative",
         marginBottom: "-4px"
     },
-    delete: {        
-        position: 'relative',      
-    },
     deleteIcon: {
         position: 'absolute',
         top: '0',
         right: '0',
+        width: '2rem',
         opacity: '0',
         transition: 'opacity 120ms ease-in-out',
         zIndex: '10',
-        padding: '3px 5px',
+        padding: '5px',
         color: 'white',
         backgroundColor: '#eb3d30'
     },
