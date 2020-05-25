@@ -3,7 +3,7 @@ const drawerWidth = 400;
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -23,20 +23,19 @@ const styles = theme => ({
     marginLeft: 12,
     marginRight: 20
   },
-  hide: {
-    display: "none"
-  },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
   },
   drawerPaper: {
     width: drawerWidth,
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    overflow: 'hidden'
   },
   drawerHeader: {
     display: "flex",
+    width: '100%',
     alignItems: "center",
     padding: "0 8px",
     ...theme.mixins.toolbar,
@@ -45,7 +44,7 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     height: "calc(100vh - 64px)",
-    padding: theme.spacing.unit * 3,
+    padding: 0,
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -70,7 +69,7 @@ const styles = theme => ({
   },
   buttons: {
     width: '90%',
-    margin: '2rem auto 0 auto',
+    margin: '1rem auto 0 auto',
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',

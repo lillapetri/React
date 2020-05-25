@@ -12,7 +12,8 @@ const styles = theme => ({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    height: "64px"
+    height: "64px",
+    boxShadow: 'none',
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -21,6 +22,9 @@ const styles = theme => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
     })
+  },
+  hide: {
+    display: "none"
   },
   menuButton: {
     marginLeft: 12,
