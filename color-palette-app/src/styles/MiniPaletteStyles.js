@@ -1,13 +1,11 @@
 export default {
     root: {
-        backgroundColor: "white",
+        backgroundColor: "#0a1338",
         overflow: 'hidden',
         borderRadius: "3px",
-        border: 'none',
         boxShadow: '0 0 1.5rem rgba(0, 0, 0, .35)',
         padding: "0.5rem",
         position: "relative",
-        overflow: "hidden",
         cursor: "pointer",
         '&:hover $deleteIcon': {
             opacity: '1',
@@ -25,7 +23,7 @@ export default {
         justifyContent: "space-between",
         alignItems: "center",
         margin: "0",
-        color: "#18003b",
+        color: "white",
         paddingTop: "0.5rem",
         fontSize:"1rem",
         position: "relative"
