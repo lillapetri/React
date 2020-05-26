@@ -36,32 +36,35 @@ export default {
             textDecoration: 'none',
         },
         [sizes.down('sm')]: {
+            margin: '1rem 2rem',
+        },
+        [sizes.down('xs')]: {
             flexDirection: 'column',
-            marginBottom: '1rem',
         },
     },
     navItem: {
         fontSize: '1.5rem',
+        fontWeight: '300',
         padding: '5px 10px',
         backgroundColor: '#CB3E6F',
         borderRadius: '5px',
         transition: '.2s ease',
-        
         '&:hover': {
-            backgroundColor: '#fcec5b',
+            backgroundColor: '#071654',
             filter: 'contrast(1.4)',
-            color: '#14235B',
         },
     },
     title: {
         fontSize: '3rem',
-        textShadow: '-2px -3px 4px rgba(255, 255, 255, .15), 1px 2px 4px rgba(0, 0, 0, .5)',
-        color: '#14235B',
+        textShadow: '-2px -3px 4px rgba(255, 255, 255, .15), 1px 2px 4px rgba(0, 0, 0, .35)',
+        color: '#071654',
         backgroundPosition: '0 0',
         backgroundSize: '120%',
         fontWeight: '700',
         margin: '0.5rem 0 1rem 0',
-       
+        [sizes.down('sm')]: {
+            fontSize: '2.2rem',
+        },       
     },
     palettes: {
         boxSizing: "border-box",

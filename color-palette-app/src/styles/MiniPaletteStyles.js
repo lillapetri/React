@@ -1,8 +1,9 @@
 export default {
     root: {
-        backgroundColor: "#0a1338",
+        backgroundColor: "rgba(7, 22, 84)",
         overflow: 'hidden',
         borderRadius: "3px",
+        border: '1px solid #0a1338',
         boxShadow: '0 0 1.5rem rgba(0, 0, 0, .35)',
         padding: "0.5rem",
         position: "relative",
@@ -24,8 +25,9 @@ export default {
         alignItems: "center",
         margin: "0",
         color: "white",
-        paddingTop: "0.5rem",
+        paddingTop: "5px",
         fontSize:"1rem",
+        fontWeight: '400',
         position: "relative"
     },
     emoji: {
