@@ -1,11 +1,11 @@
 export default {
     root: {
-        backgroundColor: "rgba(7, 22, 84)",
+        backgroundColor: "rgb(7, 22, 84)",
         overflow: 'hidden',
+        border: '3px solid #0a1338',
         borderRadius: "3px",
-        border: '1px solid #0a1338',
         boxShadow: '0 0 1.5rem rgba(0, 0, 0, .35)',
-        padding: "0.5rem",
+        padding: "0rem",
         position: "relative",
         cursor: "pointer",
         '&:hover $deleteIcon': {
@@ -15,17 +15,17 @@ export default {
     colors: {
         height: "150px",
         width: "100%",
+        borderRadius: "3px",
         backgroundColor: "#dae1e4",
-        borderRadius: "5px",
         overflow: "hidden"
     },
     title: {
         display: "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
         alignItems: "center",
         margin: "0",
         color: "white",
-        paddingTop: "5px",
+        padding: '3px',
         fontSize:"1rem",
         fontWeight: '400',
         position: "relative"
