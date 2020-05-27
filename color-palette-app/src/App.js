@@ -16,6 +16,7 @@ class App extends Component {
     this.savePalette = this.savePalette.bind(this);
     this.findPalette = this.findPalette.bind(this);
     this.deletePalette = this.deletePalette.bind(this);
+    this.resetPalettes = this.resetPalettes.bind(this);
   }
   findPalette(id) {
     return this.state.palettes.find(function(palette) {
@@ -39,6 +40,13 @@ class App extends Component {
       JSON.stringify(this.state.palettes)
     );
   }
+  resetPalettes() {
+    window.localStorage.clear();
+    this.setState({palettes: seedColors})     
+  }
+  goToPalette(id){
+    this.props.history.push(`/palette/${id}`);
+  }
   render() {
     return (
       <Switch className='App'>
@@ -58,6 +66,7 @@ class App extends Component {
         render={(routeProps) => (
         <PaletteList 
         palettes={this.state.palettes} 
+        resetPalettes={this.resetPalettes}
         deletePalette={this.deletePalette}
         {...routeProps}/>
         )}

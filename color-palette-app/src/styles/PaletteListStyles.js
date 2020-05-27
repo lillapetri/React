@@ -2,8 +2,8 @@ import sizes from './mediaQueries';
 
 export default {
     root: {
-        backgroundColor: 'white',
-        backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, .7), rgba(211, 233, 240, .45)), url("https://images.unsplash.com/photo-1544277811-ce00cbaa4642?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1939&q=80")',
+        backgroundColor: '#fafafa',
+        backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, .65), rgba(211, 233, 240, .4)), url("https://images.unsplash.com/photo-1544277811-ce00cbaa4642?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1939&q=80")',
         backgroundPosition: 'center',
         height: "100vh",
         display: "flex",
@@ -12,6 +12,7 @@ export default {
         overflow: 'scroll',
     },
     container: {
+        position: 'relative',
         width: "50%",
         display: "flex",
         flexDirection: 'row',
@@ -23,50 +24,78 @@ export default {
             width: '100%'
         },
     },
+    title: {
+        fontSize: '3rem',
+        textShadow: '-1px -2px 3px rgba(255, 255, 255, .15), 1px 2px 4px rgba(0, 0, 0, .35)',
+        color: '#071654',
+        fontWeight: '700',
+        margin: '1rem',
+        [sizes.down('md')]: {
+            fontSize: '2rem',
+        },       
+        [sizes.down('sm')]: {
+            fontSize: '1.5rem',
+            marginLeft: '2.5rem'
+        },       
+    },
     nav: {
+        position: 'static',
+        top: '0',
+        marginBottom: '1rem',
+        paddingTop: '.5rem',
+        zIndex: 100,
         display: "flex",
         flexDirection: 'row',
-        justifyContent: 'space-between',
         alignItems: 'center',
+        textAlign: 'left',
         textDecoration: 'none',
         textTransform: 'uppercase',
         width: "100%",
+        '&:hover $navItem': {
+            display: 'block',       
+        },
         '& a':{
-            color: 'white',
             textDecoration: 'none',
         },
         [sizes.down('sm')]: {
-            margin: '1rem 2rem',
+            margin: '1rem 0',
         },
-        [sizes.down('xs')]: {
-            flexDirection: 'column',
-        },
+    },
+    NavContent: {
+        display: "flex",
+        flexDirection: 'row-reverse',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '20px'
+    },
+    menuIcon: {
+        color: 'white',
+        backgroundColor: '#071654',
+        marginRight: '1rem',
+        width: '2.2rem',
+        height: '2.2rem',
+        padding: '.4rem',
+        cursor: 'pointer',
+        borderRadius: '50%',
+        border: '1px solid rgb(7, 22, 108, .8)',
+        [sizes.down('sm')]: {
+            width: '1.5rem',
+            height: '1.5rem',
+            padding: '.3rem',
+        }, 
     },
     navItem: {
-        fontSize: '1.5rem',
-        fontWeight: '300',
-        padding: '5px 10px',
-        backgroundColor: '#CB3E6F',
-        borderRadius: '5px',
-        transition: '.2s ease',
-        '&:hover': {
-            backgroundColor: '#071654',
-            filter: 'contrast(1.4)',
-        },
-    },
-    title: {
-        fontSize: '3rem',
-        textShadow: '-2px -3px 4px rgba(255, 255, 255, .15), 1px 2px 4px rgba(0, 0, 0, .35)',
+        display: 'none',
         color: '#071654',
-        backgroundPosition: '0 0',
-        backgroundSize: '120%',
-        fontWeight: '700',
-        margin: '0.5rem 0 1rem 0',
-        [sizes.down('sm')]: {
-            fontSize: '2.2rem',
-        },       
+        fontSize: '16px',
+        transition: '.25s ease-out',
+        '&:hover': {
+            transform: 'translateX(10px)',
+            fontWeight: 600
+        }
     },
     palettes: {
+        position: 'relative',
         boxSizing: "border-box",
         width: "100%",
         display: "grid",
