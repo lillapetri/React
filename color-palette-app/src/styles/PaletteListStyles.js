@@ -98,7 +98,7 @@ export default {
         display: 'none',
         color: '#071654',
         fontSize: '16px',
-        transition: 'all .25s ease-out',
+        transition: 'all .4s ease-out',
         '&:hover': {
             transform: 'translateX(10px)',
             fontWeight: 600

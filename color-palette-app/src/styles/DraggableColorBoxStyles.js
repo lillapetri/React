@@ -40,6 +40,7 @@ const styles = {
         }
     },
     deleteIcon: {
+        marginRight: '1rem',
         transition: 'all .3s ease'
     }
 };
