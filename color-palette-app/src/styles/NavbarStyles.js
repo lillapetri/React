@@ -8,11 +8,10 @@ export default {
         marginLeft: '10px',
         height: '6vh',
     },
-    logo: {
+    logo: { 
         marginRight: '15px',
         padding: '0 13px',
         fontSize: '22px',
-        backgroundColor: '#eceff1',
         fontFamily: 'sans-serif',
         height: '100%',
         display: 'flex',
@@ -20,7 +19,7 @@ export default {
         textTransform: 'lowercase',
         '& a': {
             textDecoration: 'none',
-            color: 'black',
+            color: '#0a1338',
         },
         [sizes.down('sm')]: {
             display: 'none',
@@ -35,9 +34,9 @@ export default {
             height: '8px'
         },
         '& .rc-slider-handle, .rc-slider-handle:hover, .rc-slider-handle:active, .rc-slider-handle:focus': {
-            backgroundColor: 'lightseagreen', 
+            backgroundColor: '#2579b1', 
             outline: 'none',
-            border: '2px solid lightseagreen',
+            border: '2px solid #2579b1',
             boxShadow: 'none',
             width: '13px',
             height: '13px',

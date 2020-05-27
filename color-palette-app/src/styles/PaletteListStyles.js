@@ -1,6 +1,15 @@
 import sizes from './mediaQueries';
 
 export default {
+    '@global':{
+        '.fade-exit': {
+            opacity: 1,
+        },
+        '.fade-exit-active': {
+            opacity: 0,
+            transition: 'opacity 400ms ease-out'
+        }
+    },
     root: {
         backgroundColor: '#fafafa',
         backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, .65), rgba(211, 233, 240, .4)), url("https://images.unsplash.com/photo-1544277811-ce00cbaa4642?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1939&q=80")',
@@ -31,11 +40,14 @@ export default {
         fontWeight: '700',
         margin: '1rem',
         [sizes.down('md')]: {
-            fontSize: '2rem',
+            fontSize: '2.5rem',
         },       
         [sizes.down('sm')]: {
-            fontSize: '1.5rem',
+            fontSize: '2rem',
             marginLeft: '2.5rem'
+        },       
+        [sizes.down('xs')]: {
+            fontSize: '1.5rem',
         },       
     },
     nav: {
@@ -69,15 +81,13 @@ export default {
         fontSize: '20px'
     },
     menuIcon: {
-        color: 'white',
-        backgroundColor: '#071654',
+        color: '#071654',
         marginRight: '1rem',
-        width: '2.2rem',
-        height: '2.2rem',
-        padding: '.4rem',
+        width: '2.6rem',
+        height: '2.6rem',
         cursor: 'pointer',
         borderRadius: '50%',
-        border: '1px solid rgb(7, 22, 108, .8)',
+        
         [sizes.down('sm')]: {
             width: '1.5rem',
             height: '1.5rem',
