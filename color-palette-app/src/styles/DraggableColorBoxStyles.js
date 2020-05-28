@@ -30,11 +30,12 @@ const styles = {
         width: '100%',
         left: '0',
         bottom: '0',
-        padding: '10px',
+        padding: '5px',
         letterSpacing: '1px',
         fontSize: '12px', 
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
         '&:hover svg': {
             transform: 'scale(1.3)'
         }

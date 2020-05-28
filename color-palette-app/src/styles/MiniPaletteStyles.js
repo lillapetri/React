@@ -50,9 +50,9 @@ export default {
         opacity: '0',
         transition: 'opacity 120ms ease-in-out',
         zIndex: '10',
-        padding: '5px',
+        padding: '6px',
         color: 'white',
-        backgroundColor: '#eb3d30'
+        backgroundColor: '#e11d23'
     },
        
 }

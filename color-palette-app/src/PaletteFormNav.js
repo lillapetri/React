@@ -53,14 +53,11 @@ class PaletteFormNav extends Component {
             >
               <PaletteIcon />
             </IconButton>
-            <Typography variant='h6' color='inherit' noWrap>
-              Create A Palette
-            </Typography>
           </Toolbar>
           <div className={classes.navBtns}>
             <Link to='/'>
               <Button
-                variant='contained'
+                variant='outlined'
                 color='secondary'
                 className={classes.button}
               >

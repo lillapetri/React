@@ -56,7 +56,7 @@ class App extends Component {
       <Route 
         render={({location}) => (
           <TransitionGroup>
-          <CSSTransition key={location.key} classNames='fade' timeout={500}>
+          <CSSTransition key={location.pathname} classNames='fade' timeout={500}>
           <Switch location={location} className='App'>
           <Route
             exact
@@ -108,7 +108,17 @@ class App extends Component {
                   )}
                 />
               </Page>
-              
+            )}
+            />
+            <Route 
+            render={(routeProps) => (
+              <Page>
+                <PaletteList
+                palettes={this.state.palettes} 
+                resetPalettes={this.resetPalettes}
+                deletePalette={this.deletePalette}
+                {...routeProps}/>
+              </Page>
             )}
             />
           </Switch>

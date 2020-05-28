@@ -90,6 +90,7 @@ export default {
     },
     copyMessage: {
         position: 'fixed',
+        zIndex: '-5',
         top: '0',
         bottom: '0',
         right: '0',

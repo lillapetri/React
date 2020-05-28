@@ -1,6 +1,6 @@
 import sizes from './mediaQueries';
 
-const drawerWidth = 400;
+const drawerWidth = 300;
 
 const styles = theme => ({
   root: {
@@ -79,7 +79,7 @@ const styles = theme => ({
     alignItems: 'center',
   },
   btn: {
-    padding: '5px 10px',
+    padding: '3px 6px',
     boxShadow: 'none',
     
   }

@@ -1,5 +1,5 @@
 import sizes from './mediaQueries';
-const drawerWidth = 400;
+const drawerWidth = 300;
 const styles = theme => ({
   root: {
     display: "flex"

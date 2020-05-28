@@ -11,8 +11,8 @@ export default {
         }
     },
     root: {
-        backgroundColor: '#fafafa',
-        backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, .65), rgba(211, 233, 240, .4)), url("https://images.unsplash.com/photo-1544277811-ce00cbaa4642?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1939&q=80")',
+        backgroundColor: '#abc4e0',
+        backgroundImage: 'linear-gradient(to bottom, rgba(255, 255, 255, .75) 25%, #94cbf7)',
         backgroundPosition: 'center',
         height: "100vh",
         display: "flex",
@@ -58,14 +58,12 @@ export default {
         zIndex: 100,
         display: "flex",
         flexDirection: 'row',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         textAlign: 'left',
         textDecoration: 'none',
         textTransform: 'uppercase',
         width: "100%",
-        '&:hover $navItem': {
-            display: 'block',       
-        },
         '& a':{
             textDecoration: 'none',
         },
@@ -83,19 +81,21 @@ export default {
     menuIcon: {
         color: '#071654',
         marginRight: '1rem',
+        marginLeft: '2rem',
         width: '2.6rem',
         height: '2.6rem',
         cursor: 'pointer',
         borderRadius: '50%',
         
         [sizes.down('sm')]: {
+            margin: '0 5px',
             width: '1.5rem',
             height: '1.5rem',
             padding: '.3rem',
         }, 
     },
     navItem: {
-        display: 'none',
+        display: 'block',
         color: '#071654',
         fontSize: '16px',
         transition: 'all .4s ease-out',

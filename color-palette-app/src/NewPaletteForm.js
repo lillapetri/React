@@ -56,9 +56,20 @@ class NewPaletteForm extends Component {
 
   randomColor() {
     // pick random color from existing palettes
-    const allColors = this.props.palettes.map(p => p.colors).flat();
-    var rand = Math.floor(Math.random() * allColors.length);
-    const randomColor = allColors[rand];
+    const allColors =
+      this.props.palettes.length === 0
+        ? seedColors.map(p => p.colors).flat()
+        : this.props.palettes.map(p => p.colors).flat();
+    let rand;
+    let randomColor;
+    let isDuplicateColor = true;
+    while(isDuplicateColor){
+      rand = Math.floor(Math.random() * allColors.length);
+      randomColor = allColors[rand];
+      isDuplicateColor = this.state.colors.some(
+        color => color.name === randomColor.name
+        );
+    }
     this.setState({colors: [...this.state.colors, randomColor]});  
   }
 
@@ -130,19 +141,19 @@ class NewPaletteForm extends Component {
             </IconButton>
           </div>
           <Divider />
+          <Typography variant='h4'>New Palette</Typography>
           <div className={classes.container}>
-            <Typography variant='h4'>Design Your Palette</Typography>
             <div className={classes.buttons}>
               <Button 
                 className={classes.btn}
-                variant='contained' 
+                variant='outlined' 
                 color='secondary' 
                 onClick={this.clearColors}>
                 Clear Palette
               </Button>
               <Button 
                 className={classes.btn}
-                variant='contained' 
+                variant='outlined' 
                 color='primary' 
                 onClick={this.randomColor} 
                 disabled={paletteFull}>
