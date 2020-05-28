@@ -13,6 +13,8 @@ import DraggableColorList from "./DraggableColorList";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import ColorPickerForm from "./ColorPickerForm";
 import styles from './styles/NewPaletteFormStyles';
+import seedColors from './seedColors';
+
 class NewPaletteForm extends Component {
   static defaultProps = {
     maxColors: 20
@@ -23,7 +25,7 @@ class NewPaletteForm extends Component {
       open: true,
       currentColor: "teal",
       newColorName: "",
-      colors: this.props.palettes[0].colors
+      colors: seedColors[0].colors
     };
     this.updateCurrentColor = this.updateCurrentColor.bind(this);
     this.addNewColor = this.addNewColor.bind(this);
