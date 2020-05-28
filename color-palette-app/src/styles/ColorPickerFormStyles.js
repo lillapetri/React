@@ -9,11 +9,10 @@ const styles = {
     },
     picker: {
         margin: '1rem auto', 
-        
     },
     addColor: {
         width: '100%',
-        padding: '1rem 2rem',
+        padding: '5px 10px',
         margin: '.5rem auto',
         fontSize: '1.6rem',
         textShadow: '1px 2px 3px rgba(0, 0, 0, .4)',
@@ -23,8 +22,7 @@ const styles = {
     },
     colorNameInput: {
         width: '100%',
-        height: '70px',
-
+        height: '60px',
         borderRadius: '3px',
        
     }

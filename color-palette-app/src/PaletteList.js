@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 import Dialog from "@material-ui/core/Dialog";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,11 +12,12 @@ import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { withStyles } from "@material-ui/styles";
-import MiniPalette from "./MiniPalette";
 import blue from "@material-ui/core/colors/blue";
 import red from "@material-ui/core/colors/red";
-import styles from "./styles/PaletteListStyles";
 import PaletteIcon from '@material-ui/icons/Palette';
+
+import MiniPalette from "./MiniPalette";
+import styles from "./styles/PaletteListStyles";
 
 class PaletteList extends Component {
     constructor(props){
@@ -43,7 +45,7 @@ class PaletteList extends Component {
         this.closeDialog();
     }
     render() {
-        const { palettes, classes } = this.props;
+        const { palettes, classes, resetPalettes } = this.props;
         const { openDeleteDialog } = this.state;
         return (
             <div className={classes.root}>
@@ -53,7 +55,7 @@ class PaletteList extends Component {
                         <PaletteIcon className={classes.menuIcon}/>
                         <div className={classes.navContent}>
                         <Link className={classes.navItem} to='/palette/new'>Create palette</Link>
-                        <Link to='/' onClick={this.props.resetPalettes} className={classes.navItem} >Reset default palettes</Link>
+                        <Link to='/' onClick={resetPalettes} className={classes.navItem} >Reset default palettes</Link>
                         </div>
                         
                     </nav>
