@@ -106,6 +106,7 @@ class Game extends Component {
     let setAll = (obj, val) => Object.keys(obj).forEach(k => (obj[k] = val));
     this.setState({
       scores: () => setAll(this.state.scores, undefined),
+      locked: Array(NUM_DICE).fill(false),
       rollsLeft: NUM_ROLLS
     });
     this.animateRoll();
