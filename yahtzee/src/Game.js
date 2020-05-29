@@ -104,7 +104,11 @@ class Game extends Component {
 
   newGame() {
     let setAll = (obj, val) => Object.keys(obj).forEach(k => (obj[k] = val));
-    this.setState({ scores: () => setAll(this.state.scores, undefined) });
+    this.setState({
+      scores: () => setAll(this.state.scores, undefined),
+      rollsLeft: NUM_ROLLS
+    });
+    this.animateRoll();
   }
 
   render() {
