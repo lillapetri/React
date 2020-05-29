@@ -17,7 +17,7 @@ h2 {
   text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2), 2px 3px 3px rgba(0, 0, 0, 0.1);
   border-bottom: 2px solid #35046d;
   display: inline-block;
-  margin: .5rem auto 1rem auto;
+  margin: 0.5rem auto 1rem auto;
   letter-spacing: 1px;
 }
 .Game-dice-section {
@@ -28,17 +28,17 @@ h2 {
 
 .Game-button-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
 .Game-reroll {
   font-size: 1.4rem;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   letter-spacing: 1px;
   color: azure;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-weight: 300;
   transition: 0.3s;
   background-size: 200% auto;
