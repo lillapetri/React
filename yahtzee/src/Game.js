@@ -10,7 +10,9 @@ class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dice: Array.from({ length: NUM_DICE }).map(d => Math.floor(Math.random() * (6 - 1) + 1)),
+      dice: Array.from({ length: NUM_DICE }).map(d =>
+        Math.floor(Math.random() * (6 - 1) + 1)
+      ),
       locked: Array(NUM_DICE).fill(false),
       rollsLeft: NUM_ROLLS,
       rolling: false,
@@ -35,14 +37,15 @@ class Game extends Component {
     this.doScore = this.doScore.bind(this);
     this.totalScore = this.totalScore.bind(this);
     this.toggleLocked = this.toggleLocked.bind(this);
+    this.newGame = this.newGame.bind(this);
   }
 
   componentDidMount() {
     this.animateRoll();
   }
 
-  animateRoll(){
-    this.setState({rolling: true}, () => {
+  animateRoll() {
+    this.setState({ rolling: true }, () => {
       setTimeout(this.roll, 1000);
     });
   }
@@ -54,14 +57,14 @@ class Game extends Component {
         st.locked[i] ? d : Math.ceil(Math.random() * 6)
       ),
       locked: st.rollsLeft > 1 ? st.locked : Array(NUM_DICE).fill(true),
-      rollsLeft: st.rollsLeft - 1, 
+      rollsLeft: st.rollsLeft - 1,
       rolling: false
     }));
   }
 
   toggleLocked(idx) {
     // toggle whether idx is in locked or not
-    if(this.state.rollsLeft > 0 && !this.state.rolling){
+    if (this.state.rollsLeft > 0 && !this.state.rolling) {
       this.setState(st => ({
         locked: [
           ...st.locked.slice(0, idx),
@@ -71,7 +74,6 @@ class Game extends Component {
       }));
     }
   }
-  
 
   doScore(rulename, ruleFn) {
     // evaluate this ruleFn with the dice and score this rulename
@@ -89,22 +91,30 @@ class Game extends Component {
       "1 roll left",
       "2 rolls left",
       "Starting round..."
-      ]
+    ];
     return messages[this.state.rollsLeft];
   }
 
-  totalScore(scores){
-    return Object.keys(this.state.scores).reduce((sum,key)=>sum+parseFloat(this.scores[key]||0),0);
+  totalScore(scores) {
+    return Object.keys(this.state.scores).reduce(
+      (sum, key) => sum + parseFloat(this.scores[key] || 0),
+      0
+    );
+  }
+
+  newGame() {
+    let setAll = (obj, val) => Object.keys(obj).forEach(k => (obj[k] = val));
+    this.setState({ scores: () => setAll(this.state.scores, undefined) });
   }
 
   render() {
-    const {dice, locked, rollsLeft, rolling, scores} = this.state;
+    const { dice, locked, rollsLeft, rolling, scores } = this.state;
     return (
-      <div className='Game'>
-        <header className='Game-header'>
-          <h1 className='App-title'>Yahtzee!</h1>
+      <div className="Game">
+        <header className="Game-header">
+          <h1 className="App-title">Yahtzee!</h1>
 
-          <section className='Game-dice-section'>
+          <section className="Game-dice-section">
             <Dice
               dice={dice}
               locked={locked}
@@ -112,15 +122,16 @@ class Game extends Component {
               disabled={rollsLeft === 0}
               rolling={rolling}
             />
-            <div className='Game-button-wrapper'>
+            <div className="Game-button-wrapper">
               <button
-                className='Game-reroll'
-                disabled={locked.every(x => x) ||
-                 rollsLeft <= 0 ||
-                 rolling}
+                className="Game-reroll"
+                disabled={locked.every(x => x) || rollsLeft <= 0 || rolling}
                 onClick={this.animateRoll}
               >
-               {this.displayRollInfo()} 
+                {this.displayRollInfo()}
+              </button>
+              <button className="Game-reroll" onClick={this.newGame}>
+                New Game
               </button>
             </div>
           </section>
