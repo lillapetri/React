@@ -40,7 +40,7 @@ class Form extends Component {
               <Input id='password' name='password' autoFocus />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox color='primary' />}
+              control={<Checkbox color='secondary' />}
               label='Remember Me'
             />
             <Button
