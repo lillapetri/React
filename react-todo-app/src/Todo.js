@@ -12,12 +12,12 @@ import useToggleState from './hooks/UseToggleState';
 
 export default function Todo(props) {
     const [isEditing, toggleEdit] = useToggleState();
-    const {task, id, completed, editTodo, removeTodo} = props;
+    const {task, id, completed, editTodo, removeTodo, toggleCompletion} = props;
     return (
         <React.Fragment>
         { isEditing ? <EditTodo task={task} id={id} toggleEdit={toggleEdit} editTodo={editTodo}/> :
         <ListItem style={{height: '64px'}}> 
-           <CheckBox checked={completed} />
+           <CheckBox checked={completed} onClick={() => toggleCompletion(id, completed)}/>
             <ListItemText style={{textDecoration: completed && 'line-through'}}>{task}</ListItemText>
             <ListItemSecondaryAction>
                 <IconButton aria-label="Edit" onClick={toggleEdit} >

@@ -17,6 +17,7 @@ class TodoApp extends Component {
         this.editTodo = this.editTodo.bind(this);
         this.addTodo = this.addTodo.bind(this);
         this.removeTodo = this.removeTodo.bind(this);
+        this.toggleCompletion = this.toggleCompletion.bind(this);
     }
     editTodo(id, newTask){
         const updatedTasks = this.state.todos.map( todo =>
@@ -30,13 +31,25 @@ class TodoApp extends Component {
     removeTodo(id){
         const updatedTodos = this.state.todos.filter(todo => id !== todo.id)
         this.setState({todos: updatedTodos})
-    }    
+    }   
+    toggleCompletion(id, toggleComplete){
+        const updatedTodos = this.state.todos.map( todo =>
+            todo.id === id ? {...todo, completed: !toggleComplete} : todo)
+        this.setState({todos: updatedTodos})
+    } 
     render() {
         return (
             <div>
                 <h1>Application lives here</h1>
-                <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
-                <TodoList todos={this.state.todos} editTodo={this.editTodo} removeTodo={this.removeTodo}/>
+                <TodoForm 
+                todos={this.state.todos} 
+                addTodo={this.addTodo}/>
+                <TodoList 
+                todos={this.state.todos} 
+                editTodo={this.editTodo} 
+                removeTodo={this.removeTodo}
+                toggleCompletion={this.toggleCompletion}
+                />
             </div>
         )
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import Todo from './Todo';
 
 function TodoList(props) {  
-    const {todos, editTodo, removeTodo}= props;
+    const {todos, editTodo, removeTodo, toggleCompletion}= props;
     return (
         <ul>
             {todos.map((todo) => (
@@ -11,7 +11,8 @@ function TodoList(props) {
               key={todo.id} 
               id={todo.id} 
               editTodo={editTodo}
-              removeTodo={removeTodo} />
+              removeTodo={removeTodo}
+              toggleCompletion={toggleCompletion} />
           ))}
         </ul>
     )
