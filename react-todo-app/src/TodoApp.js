@@ -1,5 +1,7 @@
-import React, {useState, Component} from 'react';
+import React, {Component} from 'react';
+import {v4 as uuid} from 'uuid';
 import TodoList from './TodoList';
+import TodoForm from './TodoForm';
 
 class TodoApp extends Component {
     constructor(props){
@@ -13,17 +15,23 @@ class TodoApp extends Component {
             ]
         } 
         this.editTodo = this.editTodo.bind(this);
+        this.addTodo = this.addTodo.bind(this);
     }
     editTodo(id, newTask){
         const updatedTasks = this.state.todos.map( todo =>
             todo.id === id ? {...todo, task: newTask} : todo)
         this.setState({todos: updatedTasks})
-        console.log(updatedTasks);
     }
+    addTodo(currentState, newTask){
+        const newTodo = {id: uuid(), task: newTask, tags: [], completed: false};
+        this.setState({...currentState.push(newTodo)})
+    }
+        
     render() {
         return (
             <div>
                 <h1>Application lives here</h1>
+                <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
                 <TodoList todos={this.state.todos} editTodo={this.editTodo}/>
             </div>
         )
