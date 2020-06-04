@@ -16,6 +16,7 @@ class TodoApp extends Component {
         } 
         this.editTodo = this.editTodo.bind(this);
         this.addTodo = this.addTodo.bind(this);
+        this.removeTodo = this.removeTodo.bind(this);
     }
     editTodo(id, newTask){
         const updatedTasks = this.state.todos.map( todo =>
@@ -26,13 +27,16 @@ class TodoApp extends Component {
         const newTodo = {id: uuid(), task: newTask, tags: [], completed: false};
         this.setState({...currentState.push(newTodo)})
     }
-        
+    removeTodo(id){
+        const updatedTodos = this.state.todos.filter(todo => id !== todo.id)
+        this.setState({todos: updatedTodos})
+    }    
     render() {
         return (
             <div>
                 <h1>Application lives here</h1>
                 <TodoForm todos={this.state.todos} addTodo={this.addTodo}/>
-                <TodoList todos={this.state.todos} editTodo={this.editTodo}/>
+                <TodoList todos={this.state.todos} editTodo={this.editTodo} removeTodo={this.removeTodo}/>
             </div>
         )
     }

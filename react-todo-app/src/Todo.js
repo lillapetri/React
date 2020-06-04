@@ -12,7 +12,7 @@ import useToggleState from './hooks/UseToggleState';
 
 export default function Todo(props) {
     const [isEditing, toggleEdit] = useToggleState();
-    const {task, id, completed, editTodo} = props;
+    const {task, id, completed, editTodo, removeTodo} = props;
     return (
         <React.Fragment>
         { isEditing ? <EditTodo task={task} id={id} toggleEdit={toggleEdit} editTodo={editTodo}/> :
@@ -23,7 +23,7 @@ export default function Todo(props) {
                 <IconButton aria-label="Edit" onClick={toggleEdit} >
                     <EditIcon />
                 </IconButton>
-                <IconButton aria-label="Delete" >
+                <IconButton aria-label="Delete" onClick={() => removeTodo(id)} >
                     <DeleteIcon />
                 </IconButton>
             </ListItemSecondaryAction>
