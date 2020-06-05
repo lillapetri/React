@@ -13,19 +13,19 @@ import Tags from './Tags';
 
 export default function Todo(props) {
     const [isEditing, toggleEdit] = useToggleState();
-    const {task, id, tags, completed, editTodo, removeTodo, toggleCompletion, deleteTag} = props;
+    const {task, id, tags, completed} = props;
     return (
         <React.Fragment>
-        { isEditing ? <EditTodo task={task} id={id} toggleEdit={toggleEdit} editTodo={editTodo}/> :
+        { isEditing ? <EditTodo task={task} id={id}/> :
         <ListItem style={{height: '64px'}}> 
-           <CheckBox checked={completed} onClick={() => toggleCompletion(id, completed)}/>
+           <CheckBox checked={completed} />
             <ListItemText style={{textDecoration: completed && 'line-through'}}>{task}</ListItemText>
-            <Tags deleteTag={deleteTag} tags={tags} />
+            <Tags  tags={tags} />
             <ListItemSecondaryAction>                
-                <IconButton aria-label="Edit" onClick={toggleEdit} >
+                <IconButton aria-label="Edit"  >
                     <EditIcon />
                 </IconButton>
-                <IconButton aria-label="Delete" onClick={() => removeTodo(id)} >
+                <IconButton aria-label="Delete"  >
                     <DeleteIcon />
                 </IconButton>
             </ListItemSecondaryAction>

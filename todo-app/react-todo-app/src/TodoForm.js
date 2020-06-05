@@ -12,7 +12,6 @@ function TodoForm({todos, addTodo}) {
         onSubmit={(e) => {
             e.preventDefault();
             addTodo(todos, value);
-            console.log(todos)
             reset();
         }}
         >

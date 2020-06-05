@@ -8,7 +8,8 @@ const testAPIRouter = require('./routes/testAPI');
 const path = require('path');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
-const PORT = 4000;
+const bodyParser = require('body-parser');
+const PORT = process.env.PORT || 4000;
 const cors = require('cors')
 const app = express();
 let Todo = require('./models/todo');
@@ -16,8 +17,8 @@ let Todo = require('./models/todo');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', todoRoutes);
@@ -39,16 +40,19 @@ app.use(function(err, req, res, next){
 	res.send(err.message);
 });
 
-// Connect database
-mongoose.connect('mongodb://localhost:27017/Todo', { useNewUrlParser: true, useUnifiedTopology: true });
+// Configure MongoDB
+const db = 'mongodb://localhost:27017/Todo';
+
+// Connect database with Mongoose
+mongoose.connect(db,
+	{useNewUrlParser: true,
+	 useUnifiedTopology: true }
+	 )
+	 .then(() => console.log('Mongo connected'))
+	 .catch( err => console.log(err))
 const connection = mongoose.connection;
 // Populate database with initial todos
 seedDB();
-
-// Once the connection is established, callback
-connection.once('open', () => {
-    console.log("MongoDB database connection established successfully");
-});
 
 todoRoutes.route('/').get( (req,res) => {
     Todo.find({}, (err, allTodos) => {
@@ -60,7 +64,7 @@ todoRoutes.route('/').get( (req,res) => {
 	});
 });
 
-
-app.listen( (process.env.port || PORT), () => {
+// Run app on configured port
+app.listen(PORT, () => {
     console.log("Server is running on port " + PORT);
 });
