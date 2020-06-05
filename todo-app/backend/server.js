@@ -1,20 +1,48 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-    passport = require("passport"),
-    LocalStrategy = require("passport-local"),
-    seedDB = require("./seedDB");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const seedDB = require("./seedDB");
 const todoRoutes = express.Router();
+const testAPIRouter = require('./routes/testAPI');
+const path = require('path');
+const createError = require('http-errors');
+const cookieParser = require('cookie-parser');
 const PORT = 4000;
+const cors = require('cors')
+const app = express();
 let Todo = require('./models/todo');
 
-const app = express();
-//app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.set('views', path.join(__dirname, 'views'));
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', todoRoutes);
+app.use('/testAPI', testAPIRouter);
+
+// Catch 404 error and forward to error handler
+app.use(function(req, res, next){
+	next(createError(404));
+})
+
+// Error handler
+app.use(function(err, req, res, next){
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = res.app.get('env') === 'development' ? err: {};
+
+	// render error page
+	res.status(err.status || 500);
+	res.send(err.message);
+});
+
+// Connect database
 mongoose.connect('mongodb://localhost:27017/Todo', { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
-//app.use(express.static(__dirname + "/public"));
-//app.use(flash()); 
+// Populate database with initial todos
 seedDB();
 
 // Once the connection is established, callback
@@ -28,54 +56,11 @@ todoRoutes.route('/').get( (req,res) => {
 			console.log(err);
 		} else {
             res.json(allTodos);
-            console.log(allTodos);
 		}
 	});
 });
 
-todoRoutes.route('/:id').get((req,res) => {
-    const id = req.params.id;
-    Todo.findById(id).populate("todos").exec((err, foundTodo) => {
-		if(err){
-			console.log(err);
-		} else {
-			console.log(foundTodo);
-		}
-	});
-});
 
-todoRoutes.route('/add').post((req,res) => {
-    const todo = new Todo(req.body);
-    todo.save()
-        .then( todo => {
-            res.status(200).json({'todo': 'todo added successfully'});
-        })
-        .catch( err => {
-            res.status(400).send('adding new todo failed');
-        });
-});
-
-todoRoutes.route('/update/:id').post((req,res) => {
-    Todo.findById(req.params.id, (err, todo) => {
-        if(!todo)
-            res.status(404).send('Data is not found');
-        else {
-            todo.todo_description = req.body.todo_description;
-            todo.todo_responsible = req.body.todo_responsible;
-            todo.todo_priority = req.body.todo_priority;
-            todo.todo_completed = req.body.todo_completed;
-            todo.save().then( todo => {
-                res.json('Todo updated');
-            })
-            .catch( err => {
-                res.status(400).send("Update not possible");
-            });
-        }
-    });
-});
-
-app.use('/', todoRoutes);
-
-app.listen( PORT, () => {
+app.listen( (process.env.port || PORT), () => {
     console.log("Server is running on port " + PORT);
 });
