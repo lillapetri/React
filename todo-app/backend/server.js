@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 4000;
 const cors = require('cors')
 const app = express();
 var Todo = require('./models/todo');
+//var User = require('./models/user');
 
 
 app.use(cors());
@@ -52,6 +53,7 @@ const connection = mongoose.connection;
 // Populate database with initial todos
 seedDB();
 
+// API routes
 todoRoutes.route('/').get( (req,res) => {
     Todo.find({}, (err, allTodos) => {
 		if(err){
@@ -101,17 +103,7 @@ todoRoutes.route('/update/:id').post((req,res) => {
 	.catch(err => res.send(err.message));
     
 });
-/* todoRoutes.delete("/:id", (req, res) => {
-	var id = ObjectId(req.params.id);
-	Todo.findByIdAndRemove(id, (err, todo, res => {
-		console.log(todo);
-		if(err) {res.send(err.message)};
-		if(!todo) {res.send('No todo found')};
-		res.send('Todo deleted succefully.')		
-	})
-	.catch(err => res.send(err.message))
-	)
-}); */
+
 todoRoutes.delete("/:id", (req, res) => {
 	var query = { _id: req.params.id};
 	Todo.remove(query, (err) => {

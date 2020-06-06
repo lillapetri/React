@@ -10,19 +10,20 @@ import EditIcon from '@material-ui/icons/Edit';
 import EditTodo from './todoModifiers/EditTodo';
 import DeleteTodo from './todoModifiers/DeleteTodo';
 import useToggleState from './hooks/UseToggleState';
-import Tags from './Tags';
+import Tags2 from './Tags2';
 import { List } from '@material-ui/core';
 
 export default function Todo(props) {
     const [isEditing, toggleEdit] = useToggleState();
     const {task, _id, tags, completed} = props;
+    
     return (
         <List>
         { isEditing ? <EditTodo task={task} id={_id} tags={tags} completed={completed} /> :
         <ListItem style={{height: '64px'}}> 
            <CheckBox checked={completed} />
             <ListItemText style={{textDecoration: completed && 'line-through'}}>{task}</ListItemText>
-            <Tags  tags={tags} />
+            <Tags2  tags={tags}/>
             <ListItemSecondaryAction>                
                 <IconButton aria-label="Edit" onClick={toggleEdit} >
                     <EditIcon />

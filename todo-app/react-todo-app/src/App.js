@@ -1,17 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
-import CreateTodo from './todoModifiers/CreateTodo';
 import Navbar from './Navbar';
-import TodoApp from './TodoApp';
+import LandingPage from './LandingPage';
 import TodoAppTest from './TodoAppTest';
 
 function App() {
   return (
     <Router>
       <Navbar />
-      <Route path='/' component={TodoAppTest} /> 
-      
+      <Route path='/' exact component={LandingPage} />
+      <Route path='/todos' exact component={TodoAppTest} />
     </Router>
   );
 }

@@ -42,7 +42,7 @@ export default class CreateTodo extends Component {
         .then( response => console.log(response.data))
         .catch(err => console.log(err.message));
     }
-    onSubmit = e =>{           
+    onSubmit = e =>{          
         this.createTodo();
         console.log('Form submitted:');
         
@@ -55,6 +55,7 @@ export default class CreateTodo extends Component {
             createdAt: '',
             author: '' 
         })
+        this.history.push('/todos');
     }
 
     render() {

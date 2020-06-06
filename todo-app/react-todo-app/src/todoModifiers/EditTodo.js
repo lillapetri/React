@@ -2,13 +2,15 @@ import React , { Component } from 'react';
 import {v4 as uuid} from 'uuid';
 import axios from 'axios';
 
+import Tags2 from '../Tags2';
+
 export default class EditTodo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             task: '',
-            tags: [{tag_id: '', tag_text: ''}],
+            tags: [],
             completed: false, 
             createdAt: ''
         }
@@ -33,12 +35,13 @@ export default class EditTodo extends Component {
         });
     }
 
-    onChangeTags = (id, newTag) => {
-        const updatedTags = this.state.tags.map((tag, i) => tag.tag_id === id ? {...tag, tag_text: newTag} : tag)
+    onChangeTags = (e, i) => {
+        const newTag = e.target.value;
+        const updatedTags = this.state.tags.map((tag, i) => i === this.props.id ? {...tag, tag: newTag} : tag)
         this.setState({tags: updatedTags})
     }
 
-    onChangeCompleted = (e) => {
+    onChangeCompleted = () => {
         this.setState({
             completed: !this.state.completed
         });
@@ -54,7 +57,6 @@ export default class EditTodo extends Component {
         axios.post('http://localhost:4000/update/' + this.props.id, obj)
             .then( res => console.log(res.data))
             .catch(err => console.log(err.message, this.props.id));
-
     }
 
     render() {
@@ -78,6 +80,7 @@ export default class EditTodo extends Component {
                             onChange={(e) => this.onChangeTags(e.target.value.id, e.target.value)}
                             />
                     </div> */}
+                    <Tags2 tags={this.props.tags} id={this.props.id}/>
                     <div>
                         <input  type="checkbox"
                                 id="completedCheckbox"

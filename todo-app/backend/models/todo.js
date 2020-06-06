@@ -8,17 +8,9 @@ let Todo = new Schema({
     task: {
         type: String
     },
-    tags: [
-    {
-        tag_id: {
-            type: String
-            
-        },
-        tag_text: {
-            type: String
-        },
-    }        
-    ],
+    /* tags: { 
+        type: String       
+    } */
     completed: {
         type: Boolean
     },
