@@ -70,14 +70,14 @@ export default class EditTodo extends Component {
                                 onChange={this.onChangeTask}
                                 />
                     </div>
-                    <div className="form-group">
+                   {/*  <div className="form-group">
                         <label>Tags: </label>
                         <input type="text" 
                             className="form-control"
                             value={this.state.tags.map(tag => tag.tag_text)}
                             onChange={(e) => this.onChangeTags(e.target.value.id, e.target.value)}
                             />
-                    </div>
+                    </div> */}
                     <div>
                         <input  type="checkbox"
                                 id="completedCheckbox"

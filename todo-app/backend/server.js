@@ -87,7 +87,7 @@ todoRoutes.route('/add').post((req,res) => {
 
 todoRoutes.route('/update/:id').post((req,res) => {
 	var id = ObjectId(req.params.id);
-	Todo.findById(id)
+	Todo.findByIdAndUpdate(id)
 	.then(todo => {
 		todo.task = req.body.task;
 		todo.tags = req.body.tags;
@@ -100,6 +100,26 @@ todoRoutes.route('/update/:id').post((req,res) => {
 	})
 	.catch(err => res.send(err.message));
     
+});
+/* todoRoutes.delete("/:id", (req, res) => {
+	var id = ObjectId(req.params.id);
+	Todo.findByIdAndRemove(id, (err, todo, res => {
+		console.log(todo);
+		if(err) {res.send(err.message)};
+		if(!todo) {res.send('No todo found')};
+		res.send('Todo deleted succefully.')		
+	})
+	.catch(err => res.send(err.message))
+	)
+}); */
+todoRoutes.delete("/:id", (req, res) => {
+	var query = { _id: req.params.id};
+	Todo.remove(query, (err) => {
+		if(err) {res.send(err.message)};
+		if(!query) {res.send('No todo found')};
+		res.send('Todo deleted succefully.')		
+	})
+	.catch(err => res.send(err.message))
 });
 
 

@@ -8,6 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 import EditTodo from './todoModifiers/EditTodo';
+import DeleteTodo from './todoModifiers/DeleteTodo';
 import useToggleState from './hooks/UseToggleState';
 import Tags from './Tags';
 import { List } from '@material-ui/core';
@@ -26,7 +27,7 @@ export default function Todo(props) {
                 <IconButton aria-label="Edit" onClick={toggleEdit} >
                     <EditIcon />
                 </IconButton>
-                <IconButton aria-label="Delete"  >
+                <IconButton aria-label="Delete" onClick={() => DeleteTodo(_id)} >
                     <DeleteIcon />
                 </IconButton>
             </ListItemSecondaryAction>
