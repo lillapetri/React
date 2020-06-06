@@ -4,11 +4,11 @@ import Todo from './Todo';
 function TodoList(props) {  
     const {todos}= props;
     return (
-        <ul>
+        <div>
             {todos.map((todo) => (
               <Todo {...todo} key={todo._id} />
           ))}
-        </ul>
+        </div>
     )
 }
 export default TodoList;

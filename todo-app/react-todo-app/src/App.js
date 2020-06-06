@@ -1,15 +1,18 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import CreateTodo from './todoModifiers/CreateTodo';
 import Navbar from './Navbar';
 import TodoApp from './TodoApp';
 import TodoAppTest from './TodoAppTest';
 
 function App() {
   return (
-    <div>
+    <Router>
       <Navbar />
-      <TodoAppTest/>
-    </div>
+      <Route path='/' component={TodoAppTest} /> 
+      
+    </Router>
   );
 }
 

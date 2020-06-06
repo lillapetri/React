@@ -7,22 +7,23 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
-import EditTodo from './EditTodo';
+import EditTodo from './todoModifiers/EditTodo';
 import useToggleState from './hooks/UseToggleState';
 import Tags from './Tags';
+import { List } from '@material-ui/core';
 
 export default function Todo(props) {
     const [isEditing, toggleEdit] = useToggleState();
-    const {task, id, tags, completed} = props;
+    const {task, _id, tags, completed} = props;
     return (
-        <React.Fragment>
-        { isEditing ? <EditTodo task={task} id={id}/> :
+        <List>
+        { isEditing ? <EditTodo task={task} id={_id} tags={tags} completed={completed} /> :
         <ListItem style={{height: '64px'}}> 
            <CheckBox checked={completed} />
             <ListItemText style={{textDecoration: completed && 'line-through'}}>{task}</ListItemText>
             <Tags  tags={tags} />
             <ListItemSecondaryAction>                
-                <IconButton aria-label="Edit"  >
+                <IconButton aria-label="Edit" onClick={toggleEdit} >
                     <EditIcon />
                 </IconButton>
                 <IconButton aria-label="Delete"  >
@@ -30,6 +31,6 @@ export default function Todo(props) {
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>}
-        </React.Fragment>
+        </List>
     );
 }

@@ -11,7 +11,7 @@ let Todo = new Schema({
     tags: [
     {
         tag_id: {
-            type: Number
+            type: String
             
         },
         tag_text: {
@@ -25,8 +25,7 @@ let Todo = new Schema({
     createdAt: { type: Date, default: Date.now },
     author: {
         id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+        type: String
         },
         username: String
     }
