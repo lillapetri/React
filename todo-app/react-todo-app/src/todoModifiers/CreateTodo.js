@@ -3,7 +3,11 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-export default class CreateTodo extends Component {
+import { withStyles } from '@material-ui/styles';
+import styles from '../styles/CreateTodo';
+import { CardHeader } from '@material-ui/core';
+
+class CreateTodo extends Component {
 
     constructor(props) {
         super(props);
@@ -44,18 +48,19 @@ export default class CreateTodo extends Component {
     }
 
     render() {
+        const {classes} = this.props;
         return (
-            <div style={{marginTop: 20}}>
-                <h3>Create New Todo</h3>
+            <div className={classes.root} style={{marginTop: 20}}>
+                <CardHeader className={classes.title} title={'Create new Todo'} />
                 <form onSubmit={this.onSubmit}>
                     <div>
-                        <label>Description: </label>
                         <TextField
+                        label='New todo'
                         value={this.state.task}
                         onChange={this.handleChange}
                         autoFocus          
                         />
-                        <IconButton type="submit" aria-label="add todo" >
+                        <IconButton color='primary' type="submit" aria-label="add todo" >
                             <AddCircleIcon />
                         </IconButton>
                         
@@ -65,3 +70,4 @@ export default class CreateTodo extends Component {
         )
     }
 }
+export default withStyles(styles)(CreateTodo);

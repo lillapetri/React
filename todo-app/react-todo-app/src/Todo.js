@@ -13,7 +13,23 @@ import {v4 as uuid} from 'uuid';
 import { List } from '@material-ui/core';
 import { updateTodo } from './API';
 
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      margin: '0 auto',
+      maxWidth: '500px',
+      backgroundColor: theme.palette.background.paper,
+    },
+    buttons: {
+        padding: '0 10px',
+    }
+  }));
+  
+
 export default function Todo(props) {
+    const classes = useStyles();
     const [isEditing, toggleEdit] = useToggleState();
     const {todo, task, _id, tags, completed, deleteTodo, updateTodo, addTodo, toggleCompletion} = props;
     const removeTags = (id) => {
@@ -33,22 +49,17 @@ export default function Todo(props) {
     };
     
     return (
-        <List>
+        <List className={classes.root}>
         { isEditing ? <EditTodo todo={todo} task={task} id={_id} tags={tags} completed={completed} addTags={addTags} removeTags={removeTags} updateTodo={updateTodo}/> :
         <ListItem style={{height: '64px'}}> 
            <CheckBox checked={completed} onClick={toggleCompletion} />
             <ListItemText style={{textDecoration: completed && 'line-through'}}>{task}</ListItemText>
             {tags.map(tag => <Tags tags={tags} id={tag.id} tag={tag.text} addTags={addTags} removeTags={removeTags}/>)}
-            <input
-                type="text"
-                onKeyUp={event => event.key === "Enter" ? addTags(event) : null}
-                placeholder="Press enter to add tags"
-            />
             <ListItemSecondaryAction>                
-                <IconButton aria-label="Edit" onClick={toggleEdit} >
+                <IconButton className={classes.buttons} color='primary' aria-label="Edit" onClick={toggleEdit} >
                     <EditIcon />
                 </IconButton>
-                <IconButton aria-label="Delete" onClick={deleteTodo}>
+                <IconButton className={classes.buttons} color='secondary' aria-label="Delete" onClick={deleteTodo}>
                     <DeleteIcon />
                 </IconButton>
             </ListItemSecondaryAction>

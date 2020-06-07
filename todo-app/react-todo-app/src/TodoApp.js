@@ -4,7 +4,6 @@ import * as apiCalls from './API';
 import Todo from './Todo';
 import CreateTodo from './todoModifiers/CreateTodo';
 
-
 class TodoApp extends Component {
     constructor(props) {
         super(props);

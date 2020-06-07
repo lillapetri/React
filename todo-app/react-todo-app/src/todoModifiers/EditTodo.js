@@ -1,8 +1,13 @@
 import React , { Component } from 'react';
+import FormGroup from '@material-ui/core/FormGroup';
+import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {v4 as uuid} from 'uuid';
 import axios from 'axios';
 
 import Tags from '../Tags';
+import { Switch } from '@material-ui/core';
 
 export default class EditTodo extends Component {
 
@@ -58,31 +63,34 @@ export default class EditTodo extends Component {
         axios.post('http://localhost:4000/update/' + this.props.id, obj)
             .then( res => console.log(res.data))
             .catch(err => console.log(err.message, this.props.id));
+        window.location.reload();
     }
 
     render() {
         return (
             <div>
-                <h3>Update Todo</h3>
-                <form onSubmit={this.onSubmit}>
+                <FormGroup onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label>Task: </label>
-                        <input type="text" 
-                                className="form-control"
-                                value={this.state.task}
-                                onChange={this.onChangeTask}
-                                />
+                        <TextField 
+                        fullWidth
+                        label=''
+                        type="text" 
+                        className="form-control"
+                        value={this.state.task}
+                        onChange={this.onChangeTask}
+                        />
                     </div>
                     <div>
-                        <label>Tags: </label>
-                        <input type="text" 
-                            //value={this.state.tags.map(tag => tag.tag_text)}
-                            onChange={(e) => this.onChangeTags(e.target.value.id, e.target.value)}
-                            />
+                        <TextField 
+                        fullWidth
+                        type="text" 
+                        label='Add tags'
+                        //value={this.state.tags.map(tag => tag.tag_text)}
+                        onChange={(e) => this.onChangeTags(e.target.value.id, e.target.value)}
+                        />
                     </div>
                     {this.state.tags.length !==0 && <Tags tags={this.state.tags} id={this.props.id}/>}
-                    <div>
-                        <input  
+                        <Switch 
                         id="checkbox"
                         type="checkbox"
                         onChange={this.onChangeCompleted}
@@ -90,14 +98,12 @@ export default class EditTodo extends Component {
                         value={this.state.completed}
                         />
                         <label htmlFor="checkbox">
-                            Completed
+                            {this.state.completed ? 'Completed' : 'Unfinished'}
                         </label>
-                    </div>
-                    <br />
-                    <div>
-                        <input type="submit" value="Update Todo" />
-                    </div>
-                </form>
+                        <IconButton variant="outlined" color='primary' type="submit" onClick={this.onSubmit} > 
+                            <CheckCircleIcon />
+                        </IconButton>
+                </FormGroup>
             </div>
         )
     }
