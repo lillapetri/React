@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var Todo = require("./models/todo");
+const mongoose = require("mongoose");
+const Todo = require("./models/todo");
 
 const data = [
     {id: 1, task: 'This is the first todo', completed: true},

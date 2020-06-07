@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-var ObjectId = require('mongodb').ObjectID;
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const seedDB = require("./seedDB");
@@ -12,8 +11,6 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 4000;
 const cors = require('cors')
 const app = express();
-var Todo = require('./models/todo');
-var Tag= require('./models/tag');
 //var User = require('./models/user');
 
 const todoRoutes = require("./routes/todos");

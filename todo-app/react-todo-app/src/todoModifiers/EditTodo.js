@@ -2,7 +2,7 @@ import React , { Component } from 'react';
 import {v4 as uuid} from 'uuid';
 import axios from 'axios';
 
-import Tags2 from '../Tags2';
+import Tags from '../Tags';
 
 export default class EditTodo extends Component {
 
@@ -80,7 +80,7 @@ export default class EditTodo extends Component {
                             onChange={(e) => this.onChangeTags(e.target.value.id, e.target.value)}
                             />
                     </div>
-                    {this.state.tags.length !==0 && <Tags2 tags={this.state.tags} id={this.props.id}/>}
+                    {this.state.tags.length !==0 && <Tags tags={this.state.tags} id={this.props.id}/>}
                     <div>
                         <input  
                         id="checkbox"
