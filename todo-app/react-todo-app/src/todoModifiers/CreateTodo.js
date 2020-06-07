@@ -1,11 +1,7 @@
 import React , { Component } from 'react';
-import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import {v4 as uuid} from 'uuid';
-
-import axios from 'axios';
 
 export default class CreateTodo extends Component {
 
@@ -23,28 +19,18 @@ export default class CreateTodo extends Component {
                 userName: ''
             }
         }
-        this.createTodo = this.createTodo.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange = e => {
+    handleChange(e){
         this.setState({task: e.target.value});
     }
     
-    createTodo(){
-        axios.post('http://localhost:4000/add',
-        {id: uuid(),
-        task: this.state.task,
-        tags: this.state.tags,
-        completed: false,
-        createdAt: new Date(),
-        author: this.state.author
-        })
-        .then( response => console.log(response.data))
-        .catch(err => console.log(err.message));
-    }
-    onSubmit = e =>{          
-        this.createTodo();
-        console.log('Form submitted:');
+    onSubmit(e){       
+        const obj = Object.assign({}, this.state);
+        this.props.addTodo(obj);
+        console.log('Form submitted.');
         
         // reset input
         this.setState({
@@ -55,7 +41,6 @@ export default class CreateTodo extends Component {
             createdAt: '',
             author: '' 
         })
-        this.history.push('/todos');
     }
 
     render() {

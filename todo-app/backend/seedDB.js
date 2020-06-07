@@ -2,10 +2,10 @@ var mongoose = require("mongoose");
 var Todo = require("./models/todo");
 
 const data = [
-    {id: 1, task: 'This is the first todo', tags: ['tag3', 'tag2'], completed: true},
-    {id: 2, task: 'This is the second todo', tags: ['tag1', 'tag3'], completed: false},
-    {id: 3, task: 'This is the third todo', tags: [], completed: true},
-    {id: 4, task: 'This is the fourth todo', tags: ['tag1', 'tag2', 'tag5'], completed: false}
+    {id: 1, task: 'This is the first todo', completed: true},
+    {id: 2, task: 'This is the second todo', completed: false},
+    {id: 3, task: 'This is the third todo', completed: true},
+    {id: 4, task: 'This is the fourth todo', completed: false}
 ]
 
 function seedDB(){

@@ -8,9 +8,10 @@ let Todo = new Schema({
     task: {
         type: String
     },
-    /* tags: { 
-        type: String       
-    } */
+    tags: { 
+        type: Array,
+        ref: 'Tag'       
+    },
     completed: {
         type: Boolean
     },

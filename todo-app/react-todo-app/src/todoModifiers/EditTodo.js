@@ -21,7 +21,7 @@ export default class EditTodo extends Component {
             .then( res => {
                 this.setState({
                     task: res.data.task,
-                    tags: res.data.tags,
+                    tags: [...res.data.tags],
                     completed: res.data.completed,
                     createdAt: new Date()
                 })
@@ -34,11 +34,12 @@ export default class EditTodo extends Component {
             task: e.target.value
         });
     }
-
+        
     onChangeTags = (e, i) => {
         const newTag = e.target.value;
         const updatedTags = this.state.tags.map((tag, i) => i === this.props.id ? {...tag, tag: newTag} : tag)
         this.setState({tags: updatedTags})
+        e.stopPropagation();
     }
 
     onChangeCompleted = () => {
@@ -72,30 +73,29 @@ export default class EditTodo extends Component {
                                 onChange={this.onChangeTask}
                                 />
                     </div>
-                   {/*  <div className="form-group">
+                    <div>
                         <label>Tags: </label>
                         <input type="text" 
-                            className="form-control"
-                            value={this.state.tags.map(tag => tag.tag_text)}
+                            //value={this.state.tags.map(tag => tag.tag_text)}
                             onChange={(e) => this.onChangeTags(e.target.value.id, e.target.value)}
                             />
-                    </div> */}
-                    <Tags2 tags={this.props.tags} id={this.props.id}/>
+                    </div>
+                    {this.state.tags.length !==0 && <Tags2 tags={this.state.tags} id={this.props.id}/>}
                     <div>
-                        <input  type="checkbox"
-                                id="completedCheckbox"
-                                name="completedCheckbox"
-                                onChange={this.onChangeCompleted}
-                                checked={this.state.completed}
-                                value={this.state.completed}
-                                />
-                        <label className="form-check-label" htmlFor="completedCheckbox">
+                        <input  
+                        id="checkbox"
+                        type="checkbox"
+                        onChange={this.onChangeCompleted}
+                        checked={this.state.completed}
+                        value={this.state.completed}
+                        />
+                        <label htmlFor="checkbox">
                             Completed
                         </label>
                     </div>
                     <br />
-                    <div className="form-group">
-                        <input type="submit" value="Update Todo" className="btn btn-primary" />
+                    <div>
+                        <input type="submit" value="Update Todo" />
                     </div>
                 </form>
             </div>

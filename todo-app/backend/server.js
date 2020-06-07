@@ -4,7 +4,6 @@ var ObjectId = require('mongodb').ObjectID;
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const seedDB = require("./seedDB");
-const todoRoutes = express.Router();
 const testAPIRouter = require('./routes/testAPI');
 const path = require('path');
 const createError = require('http-errors');
@@ -14,14 +13,21 @@ const PORT = process.env.PORT || 4000;
 const cors = require('cors')
 const app = express();
 var Todo = require('./models/todo');
+var Tag= require('./models/tag');
 //var User = require('./models/user');
+
+const todoRoutes = require("./routes/todos");
+const tagRoutes = require("./routes/tags");
 
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+
+// Connect routes to server.js
 app.use('/', todoRoutes);
+app.use('/:id', todoRoutes);
 app.use('/testAPI', testAPIRouter);
 
 // Catch 404 error and forward to error handler
@@ -53,69 +59,8 @@ const connection = mongoose.connection;
 // Populate database with initial todos
 seedDB();
 
-// API routes
-todoRoutes.route('/').get( (req,res) => {
-    Todo.find({}, (err, allTodos) => {
-		if(err){
-			console.log(err);
-		} else {
-            res.json(allTodos);
-		}
-	});
-});
-
-todoRoutes.route('/:id').get((req,res) => {
-	var id = ObjectId(req.params.id);
-	console.log(req.params);
-    Todo.findById(id, (err, todo) =>{
-		if(err){res.send(err.message)}
-		if(!todo){console.log('There is no todo with the given id.')}
-		res.send(todo);
-		console.log(todo);
-	});
-});
-
-todoRoutes.route('/add').post((req,res) => {
-	const todo = new Todo(req.body);
-	console.log(todo);
-	todo.save(db)
-	.then(() => {
-		res.json('Todo saved.')
-	})	
-	.catch( err => {
-		res.send(err.message);
-	});
-});
-
-todoRoutes.route('/update/:id').post((req,res) => {
-	var id = ObjectId(req.params.id);
-	Todo.findByIdAndUpdate(id)
-	.then(todo => {
-		todo.task = req.body.task;
-		todo.tags = req.body.tags;
-		todo.completed = req.body.completed;
-		todo.createdAt = req.body.createdAt;
-
-		todo.save()
-		.then(() => res.send('Todo updated!'))
-		.catch(err => res.send(err.message));
-	})
-	.catch(err => res.send(err.message));
-    
-});
-
-todoRoutes.delete("/:id", (req, res) => {
-	var query = { _id: req.params.id};
-	Todo.remove(query, (err) => {
-		if(err) {res.send(err.message)};
-		if(!query) {res.send('No todo found')};
-		res.send('Todo deleted succefully.')		
-	})
-	.catch(err => res.send(err.message))
-});
-
 
 // Run app on configured port
 app.listen(PORT, () => {
-    console.log("Server is running on port " + PORT);
+    console.log('Server is running on port ' + PORT);
 });
