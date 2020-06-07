@@ -11,6 +11,7 @@ import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
+import { Button, Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  menuButton: {
+    marginLeft: theme.spacing(10),
+  } 
 }));
 
 function ScrollTop(props) {
@@ -55,12 +59,16 @@ ScrollTop.propTypes = {
 };
 
 export default function BackToTop(props) {
+  const classes = useStyles();
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar>
         <Toolbar>
-          <Typography variant="h6">MERN Stack Todo App</Typography>
+          <Button color='inherit' href='/' >MERN Stack Todo App</Button>
+            <Button className={classes.menuButton} color='inherit'>Sign up</Button>
+            <Button className={classes.menuButton} color='inherit'>Log in</Button>
+            <Button href='/todos' className={classes.menuButton} color='inherit'>Try out</Button>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />

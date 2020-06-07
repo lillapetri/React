@@ -1,9 +1,22 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import {width, height} from '../hooks/useWindowSize';
 
-export default function LandingPage() {
+import styles from '../styles/LandingPage';
+import { Button } from '@material-ui/core';
+
+function LandingPage(props){
+    const {classes }= props;
     return (
-        <div>
-            Landing page
-        </div>
+        <main>
+            <div className={classes.root}></div>
+            <div className={classes.header}>
+                <h1 className={classes.title}>Are you too busy?</h1>
+                <h2 className={classes.title__secondary}> Manage your time with this Todo App!</h2>
+            </div>
+        </main>
     )
 }
+
+export default withStyles(styles)(LandingPage);

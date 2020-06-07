@@ -5,9 +5,8 @@ import {width, height} from '../hooks/useWindowSize';
 
 const styles = ({
     root: {
-        Zindex: '5',
         height: '90vh',
-        backgroundSize: '80%',
+        backgroundSize: '75%',
         backgroundPosition: '50% 50%',
         backgroundRepeat: 'no-repeat',
         backgroundImage: `url(../page_not_found.png)`
