@@ -29,7 +29,7 @@ todoRoutes.route('/:id').get((req,res) => {
 });
 
 // Create new todo
-todoRoutes.route('/add').post((req,res) => {
+todoRoutes.route('/').post((req,res) => {
 	const todo = new Todo(req.body);
 	console.log(todo);
 	todo.save(db)
@@ -42,7 +42,7 @@ todoRoutes.route('/add').post((req,res) => {
 });
 
 // Edit todo
-todoRoutes.route('/update/:id').post((req,res) => {
+/* todoRoutes.route('/update/:id').post((req,res) => {
 	var id = ObjectId(req.params.id);
 	Todo.findByIdAndUpdate(id)
 	.then(todo => {
@@ -57,6 +57,17 @@ todoRoutes.route('/update/:id').post((req,res) => {
 	})
 	.catch(err => res.send(err.message));
     
+}) */;
+todoRoutes.route('/:id').put((req,res) => {
+	var id = ObjectId(req.params.id);
+	const obj = Object.assign({}, req.body);
+	Todo.findByIdAndUpdate(id, obj)
+	.then((response) => {
+		res.send(response)
+	})
+	.catch( err => {
+		res.send(err.message);
+	});
 });
 
 // Delete todo

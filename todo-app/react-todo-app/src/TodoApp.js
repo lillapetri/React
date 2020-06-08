@@ -25,12 +25,15 @@ class TodoApp extends Component {
         //this.setState({todos: [this.state.todos, val]});
     }
     async toggleCompletion(todo){
-        let updatedTodo = await apiCalls.updateTodo(todo);
-        let todos = this.state.todos.map(todo => 
-          (todo._id === updatedTodo._id) ? {...todo, completed: !todo.completed} : todo
-        );
-        console.log(todos)
-        this.setState({todos: todos});
+        let todos = this.state.todos.map(t => 
+            (t._id === todo._id) ? {...t, completed: !t.completed} : t
+          );
+        await this.setState({todos: todos});
+        const updatedState = this.state.todos;
+        let index = updatedState.findIndex( t => t._id===todo._id)
+        let todoToUpdate = updatedState[index];
+        apiCalls.updateTodo(todoToUpdate);
+        //apiCalls.updateTodo(savedTodos);
     }
     
     deleteTodo(id){

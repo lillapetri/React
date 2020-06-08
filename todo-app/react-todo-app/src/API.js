@@ -2,7 +2,7 @@ import axios from 'axios';
 const API_URL = 'http://localhost:4000/';
 
 export async function getTodos(){
-  return axios.get('http://localhost:4000/')
+  return axios.get(API_URL)
   .then(response => {
       console.log('Data received from database.');
       return response.data;
@@ -13,7 +13,7 @@ export async function getTodos(){
 }
 
 export async function createTodo(val){
-  return axios.post(API_URL+'add', val)
+  return axios.post(API_URL, val)
   .then(response => response.data)
   .catch(err => console.log(err.message));
 }
@@ -26,7 +26,8 @@ export function removeTodo(id) {
 }
 
 export async function updateTodo(todo){
-    axios.put(API_URL+ 'update/' + todo._id, todo)
-    .then( res => console.log(res.data))
-    .catch(err => console.log(err.message, todo._id));
+    axios.put(API_URL + todo._id, todo)
+    .then(console.log(todo))
+    .then( res => console.log(res))
+    .catch(err => console.log(err.response, todo._id));
 }

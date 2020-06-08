@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import {v4 as uuid} from 'uuid';
+
+import * as apiCalls from '../API';
 import axios from 'axios';
 
 import Tags from '../Tags';
@@ -54,16 +56,17 @@ export default class EditTodo extends Component {
     }
 
     onSubmit = (e) => {
-        const obj = {  
+        const obj = Object.assign({}, {  
+            _id: this.props._id,
             task: this.state.task,
             tags: this.state.tags,
             completed: this.state.completed,
             createdAt: this.state.createdAt
-        };
-        axios.post('http://localhost:4000/update/' + this.props.id, obj)
+        });
+        axios.put('http://localhost:4000/' + this.props.id, obj)
             .then( res => console.log(res.data))
             .catch(err => console.log(err.message, this.props.id));
-        window.location.reload();
+        window.location.reload(); 
     }
 
     render() {

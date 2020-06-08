@@ -50,7 +50,7 @@ export default function Todo(props) {
     
     return (
         <List className={classes.root}>
-        { isEditing ? <EditTodo todo={todo} task={task} id={_id} tags={tags} completed={completed} addTags={addTags} removeTags={removeTags} updateTodo={updateTodo}/> :
+        { isEditing ? <EditTodo {...todo} task={task} id={_id} tags={tags} completed={completed} addTags={addTags} removeTags={removeTags} updateTodo={updateTodo}/> :
         <ListItem style={{height: '64px'}}> 
            <CheckBox checked={completed} onClick={toggleCompletion} />
             <ListItemText style={{textDecoration: completed && 'line-through'}}>{task}</ListItemText>
