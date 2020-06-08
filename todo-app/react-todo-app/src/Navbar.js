@@ -22,14 +22,6 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(2),
   },
   logo: {
-    padding: '5px',
-    width: '20%',
-    '&:hover': {
-      backgroundColor: 'transparent'
-    },
-    '@media only screen and (max-width: 600px)': {
-      display: 'none'
-    },
   },
   menuButton: {
     marginLeft: theme.spacing(2),
@@ -45,11 +37,8 @@ const useStyles = makeStyles((theme) => ({
     width: '85%',
     display: 'flex',
     justifyContent: 'flex-end', 
-    alignItems: 'center',
-    '@media only screen and (max-width: 600px)': {
-      width: '100%',
-      justifyContent: 'space-around'
-    },
+    alignItems: 'center'
+    
   } 
 }));
 
@@ -100,7 +89,7 @@ export default function BackToTop(props) {
       <CssBaseline />
       <AppBar>
         <Toolbar>
-          <Button className={classes.logo} color='inherit' href='/' disableTouchRipple>MERN Stack Todo App</Button>
+          <Button className={classes.logo} color='inherit' href='/' >MERN Stack Todo App</Button>
           <div className={classes.navItems}>
             {isLoggedIn ? 
             <> 
