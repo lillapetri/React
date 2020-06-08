@@ -9,11 +9,21 @@ indexRoutes.post('/register', (req, res) => {
     res.send('register');
 });
 
+// All users
+indexRoutes.route('/').get( (req,res) => {
+    User.find({}, (err, allUsers) => {
+		if(err){
+			console.log(err);
+		} else {
+            res.json(allUsers);
+		}
+	});
+});
+
 // Create new User
 indexRoutes.route('/').post((req,res) => {
-	let User = new User(req.body);
-	console.log(User);
-	User.save(db)
+	let user = new User(req.body);
+	user.save(db)
 	.then(() => {
 		res.json('User saved.')
 	})	
@@ -22,6 +32,7 @@ indexRoutes.route('/').post((req,res) => {
 	});
 });
 
+// Edit user data
 indexRoutes.route('/:id').put((req,res) => {
 	var id = ObjectId(req.params.id);
 	const obj = Object.assign({}, req.body);
