@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   logo: {
   },
   menuButton: {
-    marginLeft: theme.spacing(2),
+    padding: '0 10px',
     border: '1px solid transparent',
     transition: 'all .2s ease-in-out',
     '&:hover':{
