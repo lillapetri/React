@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:4000/';
+const API_URL = 'http://localhost:4000/todos/';
 
 export async function getTodos(){
   return axios.get(API_URL)

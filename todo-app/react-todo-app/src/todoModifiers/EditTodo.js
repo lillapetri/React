@@ -24,7 +24,7 @@ export default class EditTodo extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/' + this.props.id)
+        axios.get('http://localhost:4000/todos/' + this.props.id)
             .then( res => {
                 this.setState({
                     task: res.data.task,
@@ -63,7 +63,7 @@ export default class EditTodo extends Component {
             completed: this.state.completed,
             createdAt: this.state.createdAt
         });
-        axios.put('http://localhost:4000/' + this.props.id, obj)
+        axios.put('http://localhost:4000/todos/' + this.props.id, obj)
             .then( res => console.log(res.data))
             .catch(err => console.log(err.message, this.props.id));
         window.location.reload(); 

@@ -14,6 +14,7 @@ const app = express();
 //var User = require('./models/user');
 
 const todoRoutes = require("./routes/todos");
+const indexRoutes = require("./routes/index");
 const tagRoutes = require("./routes/tags");
 
 
@@ -23,9 +24,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 // Connect routes to server.js
-app.use('/', todoRoutes);
-app.use('/:id', todoRoutes);
+app.use('/index', indexRoutes);
 app.use('/testAPI', testAPIRouter);
+app.use('/todos', todoRoutes);
+
 
 // Catch 404 error and forward to error handler
 app.use(function(req, res, next){
@@ -48,7 +50,9 @@ const db = 'mongodb://localhost:27017/todo_v1';
 
 // Connect database with Mongoose
 mongoose.connect(db,
-	{useNewUrlParser: true})
+	{useNewUrlParser: true,
+	useCreateIndex: true,
+	})
 	.then(() => console.log('Mongo connected'))
 	.catch( err => console.log(err))
 const connection = mongoose.connection;

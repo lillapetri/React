@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import Divider from "@material-ui/core/Divider";
 import {v4 as uuid} from 'uuid';
 import * as apiCalls from './API';
 import Todo from './Todo';
 import CreateTodo from './todoModifiers/CreateTodo';
+import { Paper, Grid } from '@material-ui/core';
 
 class TodoApp extends Component {
     constructor(props) {
@@ -57,7 +59,9 @@ class TodoApp extends Component {
     };
     
     render() {
-        const todos = this.state.todos.map((todo) => (
+        const todos = this.state.todos.map((todo, i) => (
+            <React.Fragment>
+            {i < this.state.todos.length && <Divider />}
             <Todo
                 key={uuid()}
                 id={todo._id}
@@ -68,13 +72,15 @@ class TodoApp extends Component {
                 deleteTodo={this.deleteTodo.bind(this, todo._id)} // can't bind the method in the constructor, because it also needs unique data from each todo item (in this case the id)
                 toggleCompletion={this.toggleCompletion.bind(this, todo)}
               />
+              
+            </React.Fragment>
           ));
         
         return(
-        <React.Fragment>
+        <Paper style={{ margin: '6vh auto', padding: 14, maxWidth: '600px' }}>
             <CreateTodo {...this.state.todos} addTodo={this.addTodo} />
-            {todos}
-        </React.Fragment>
+            <Grid xs={12} sm={8} md={7} item  style={{margin: '0 auto'}}>{todos}</Grid>
+        </Paper>
         )
     }
 }

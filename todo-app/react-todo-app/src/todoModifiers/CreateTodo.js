@@ -5,7 +5,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { withStyles } from '@material-ui/styles';
 import styles from '../styles/CreateTodoStyles';
-import { CardHeader } from '@material-ui/core';
+import { CardHeader, FormGroup } from '@material-ui/core';
 
 class CreateTodo extends Component {
 
@@ -50,7 +50,7 @@ class CreateTodo extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <div className={classes.root} style={{marginTop: 20}}>
+            <FormGroup className={classes.root} style={{marginTop: 20}}>
                 <CardHeader className={classes.title} title={'Create new Todo'} />
                 <form onSubmit={this.onSubmit}>
                     <div>
@@ -58,6 +58,7 @@ class CreateTodo extends Component {
                         label='New todo'
                         value={this.state.task}
                         onChange={this.handleChange}
+                        required
                         autoFocus          
                         />
                         <IconButton color='primary' type="submit" aria-label="add todo" >
@@ -66,7 +67,7 @@ class CreateTodo extends Component {
                         
                     </div>
                 </form>
-            </div>
+            </FormGroup>
         )
     }
 }
