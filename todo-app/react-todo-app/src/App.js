@@ -4,6 +4,8 @@ import Navbar from './Navbar';
 import TodoApp from './TodoApp';
 import page_404 from './pages/page_404';
 import LandingPage from './pages/LandingPage';
+import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Switch>
       <Route path='/' exact component={LandingPage} />
       <Route path='/todos' exact component={TodoApp} />
+      <Route path='/signup' exact component={SignUpPage} />
+      <Route path='/login' exact component={LoginPage} />
       <Route component={page_404} />
       </Switch>
     </Router>

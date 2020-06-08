@@ -13,14 +13,32 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 import { Button, Link } from '@material-ui/core';
 
+import useToggleState from './hooks/UseToggleState';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  logo: {
+  },
   menuButton: {
-    marginLeft: theme.spacing(10),
+    marginLeft: theme.spacing(2),
+    border: '1px solid transparent',
+    transition: 'all .2s ease-in-out',
+    '&:hover':{
+      borderColor: 'rgba(255, 255, 255, .8)',
+      textShadow: '1px 1px 2px #2B3777'
+    }
+  },
+  navItems: {
+    marginRight: '0',
+    width: '85%',
+    display: 'flex',
+    justifyContent: 'flex-end', 
+    alignItems: 'center'
+    
   } 
 }));
 
@@ -60,15 +78,30 @@ ScrollTop.propTypes = {
 
 export default function BackToTop(props) {
   const classes = useStyles();
+  const [isLoggedIn, setLogin] = useToggleState();
+  const handleLogin = (e) => {
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
+    setLogin();
+  }
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar>
         <Toolbar>
-          <Button color='inherit' href='/' >MERN Stack Todo App</Button>
-            <Button className={classes.menuButton} color='inherit'>Sign up</Button>
-            <Button className={classes.menuButton} color='inherit'>Log in</Button>
-            <Button href='/todos' className={classes.menuButton} color='inherit'>Try out</Button>
+          <Button className={classes.logo} color='inherit' href='/' >MERN Stack Todo App</Button>
+          <div className={classes.navItems}>
+            {isLoggedIn ? 
+            <> 
+            <Typography color='inherit'>Welcome back!</Typography>
+            <Button className={classes.menuButton} color='inherit' disableTouchRipple onClick={handleLogin}>Log out</Button> 
+            </>:
+            <>
+            <Button href='/signup' className={classes.menuButton} disableTouchRipple  color='inherit'>Sign up</Button>
+            <Button href='/login' className={classes.menuButton} color='inherit' disableTouchRipple>Log in</Button>
+            <Button href='/todos' className={classes.menuButton} disableTouchRipple  color='inherit'>Try out</Button>
+            </>}
+          </div>
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />

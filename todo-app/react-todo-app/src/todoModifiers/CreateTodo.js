@@ -4,7 +4,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 import { withStyles } from '@material-ui/styles';
-import styles from '../styles/CreateTodo';
+import styles from '../styles/CreateTodoStyles';
 import { CardHeader } from '@material-ui/core';
 
 class CreateTodo extends Component {
