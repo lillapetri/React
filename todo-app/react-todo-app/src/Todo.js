@@ -11,7 +11,7 @@ import useToggleState from './hooks/UseToggleState';
 import Tags from './Tags';
 import {v4 as uuid} from 'uuid';
 import { List } from '@material-ui/core';
-import { updateTodo } from './API';
+import { updateTodo } from './APIs/TodoAPI';
 
 import { makeStyles } from '@material-ui/core/styles';
 

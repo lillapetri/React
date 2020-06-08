@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Divider from "@material-ui/core/Divider";
 import {v4 as uuid} from 'uuid';
-import * as apiCalls from './API';
+import * as apiCalls from './APIs/TodoAPI';
 import Todo from './Todo';
 import CreateTodo from './todoModifiers/CreateTodo';
 import { Paper, Grid } from '@material-ui/core';
