@@ -36,6 +36,16 @@ class TodoApp extends Component {
         apiCalls.updateTodo(todoToUpdate);
         //apiCalls.updateTodo(savedTodos);
     }
+    /* removeTag(tag){
+        let todos = this.state.todos.map(t => 
+            (t._id === todo._id) ? {...t, tags: } : t
+          );
+        await this.setState({todos: todos});
+        const updatedState = this.state.todos;
+        let index = updatedState.findIndex( t => t._id===todo._id)
+        let todoToUpdate = updatedState[index];
+        apiCalls.updateTodo(todoToUpdate);
+    }; */
     
     deleteTodo(id){
         apiCalls.removeTodo(id);
@@ -67,6 +77,7 @@ class TodoApp extends Component {
                 task={todo.task} 
                 completed={todo.completed} 
                 tags={todo.tags}
+               
                 deleteTodo={this.deleteTodo.bind(this, todo._id)} // can't bind the method in the constructor, because it also needs unique data from each todo item (in this case the id)
                 toggleCompletion={this.toggleCompletion.bind(this, todo)}
               />
@@ -75,7 +86,7 @@ class TodoApp extends Component {
         return(
         <Paper style={{ margin: '6vh auto', padding: 14, maxWidth: '600px' }}>
             <CreateTodo {...this.state.todos} addTodo={this.addTodo} />
-            <Grid xs={12} sm={8} md={7} item  style={{margin: '0 auto'}}>{todos}</Grid>
+            <Grid xs={12} md={10} item  style={{margin: '0 auto'}}>{todos}</Grid>
         </Paper>
         )
     }

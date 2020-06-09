@@ -4,12 +4,7 @@ const db = 'mongodb://localhost:27017/todo_v1';
 const ObjectId = require('mongodb').ObjectID
 const User = require("../models/user");
 
-// show register form
-indexRoutes.post('/register', (req, res) => {
-    res.send('register');
-});
-
-// All users
+// Show all users
 indexRoutes.route('/').get( (req,res) => {
     User.find({}, (err, allUsers) => {
 		if(err){
@@ -18,6 +13,19 @@ indexRoutes.route('/').get( (req,res) => {
             res.json(allUsers);
 		}
 	});
+});
+
+// Log in
+indexRoutes.route('/:id').get((req,res) => {
+	var id = ObjectId(req.params.id);
+	console.log(req.params);
+	Todo.findById(id, (err, user) => {
+		if(err || !user){
+			console.log('no user found');
+		}
+		console.log(user);
+		res.json(user);
+	})
 });
 
 // Create new User

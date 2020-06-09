@@ -14,6 +14,12 @@ export async function signUp(req){
   .catch(err => console.log(err.message));
 }
 
+export async function logIn(id){
+    return axios.post(API_URL + id)
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
+
 export function deleteAccount(id) {
     axios.delete(API_URL + id)
     .then( response => console.log(response.data))

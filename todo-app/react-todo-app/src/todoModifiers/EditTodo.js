@@ -17,6 +17,7 @@ export default class EditTodo extends Component {
         this.state = {
             task: '',
             tags: [],
+            newTag: '',
             completed: false, 
             createdAt: ''
         }
@@ -35,30 +36,17 @@ export default class EditTodo extends Component {
             .catch( err => console.log(err));
     }
 
-    onChangeTask= (e) => {
+    handleChange = (evt) => {
         this.setState({
-            task: e.target.value
+          [evt.target.name]: evt.target.value
         });
     }
-        
-    onChangeTags = (e, i) => {
-        const newTag = e.target.value;
-        const updatedTags = this.state.tags.map((tag, i) => i === this.props.id ? {...tag, tag: newTag} : tag)
-        this.setState({tags: updatedTags})
-        e.stopPropagation();
-    }
-
-    onChangeCompleted = () => {
-        this.setState({
-            completed: !this.state.completed
-        });
-    }
-
+    
     onSubmit = (e) => {
         const obj = Object.assign({}, {  
             _id: this.props._id,
             task: this.state.task,
-            tags: this.state.tags,
+            tags: [...this.state.tags, this.state.newTag],
             completed: this.state.completed,
             createdAt: this.state.createdAt
         });
@@ -69,38 +57,40 @@ export default class EditTodo extends Component {
     }
 
     render() {
+        const {task, completed, newTag} = this.state;
         return (
             <div>
                 <FormGroup onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <TextField 
                         fullWidth
-                        label=''
                         type="text" 
+                        name='task'
                         className="form-control"
-                        value={this.state.task}
-                        onChange={this.onChangeTask}
+                        value={task}
+                        onChange={this.handleChange}
                         />
                     </div>
                     <div>
                         <TextField 
                         fullWidth
                         type="text" 
+                        name='newTag'
                         label='Add tags'
-                        //value={this.state.tags.map(tag => tag.tag_text)}
-                        onChange={(e) => this.onChangeTags(e.target.value.id, e.target.value)}
+                        value={newTag}
+                        onChange={this.handleChange}
                         />
                     </div>
-                    {this.state.tags.length !==0 && <Tags tags={this.state.tags} id={this.props.id}/>}
                         <Switch 
                         id="checkbox"
                         type="checkbox"
-                        onChange={this.onChangeCompleted}
-                        checked={this.state.completed}
-                        value={this.state.completed}
+                        name='completed'
+                        onChange={() => this.setState({completed: !completed})}
+                        checked={completed}
+                        value={completed}
                         />
                         <label htmlFor="checkbox">
-                            {this.state.completed ? 'Completed' : 'Unfinished'}
+                            {completed ? 'Completed' : 'Unfinished'}
                         </label>
                         <IconButton variant="outlined" color='primary' type="submit" onClick={this.onSubmit} > 
                             <CheckCircleIcon />

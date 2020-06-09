@@ -8,9 +8,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import EditTodo from './todoModifiers/EditTodo';
 import useToggleState from './hooks/UseToggleState';
+import useInputState from './hooks/UseInputState';
 import Tags from './Tags';
 import { List } from '@material-ui/core';
-
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,16 +27,16 @@ const useStyles = makeStyles((theme) => ({
   
 
 export default function Todo(props) {
+    const {todo, task, _id, tags, completed, deleteTodo, updateTodo, toggleCompletion} = props;
     const classes = useStyles();
     const [isEditing, toggleEdit] = useToggleState();
-    const {todo, task, _id, tags, completed, deleteTodo, updateTodo, toggleCompletion} = props;
-    const removeTags = (id) => {
-        /* if (!e) var e = window.event;
-        e.cancelBubble = true;
-        if (e.stopPropagation) e.stopPropagation();
-        const updatedTags = [...tags.filter((_, index) => index !== (id))]
-        setTags([...tags.filter((_, index) => index !== id)]); */
-    };
+    const [tagsArray, setTags, reset] = useInputState(tags);
+    
+    const removeTag = (t) =>{
+        let updatedTags = tags.filter(tag => tag.id === t.id);
+        console.log(updatedTags);
+    }
+
     const addTags = (e)=> {
         /* if (e.target.value !== "") {
             setTags({tags: [...tags, e.target.value]});
@@ -48,11 +48,10 @@ export default function Todo(props) {
     
     return (
         <List className={classes.root}>
-        { isEditing ? <EditTodo {...todo} task={task} id={_id} tags={tags} completed={completed} addTags={addTags} removeTags={removeTags} updateTodo={updateTodo}/> :
+        { isEditing ? <EditTodo {...todo} task={task} id={_id} tags={tags} completed={completed} addTags={addTags} updateTodo={updateTodo}/> :
         <ListItem style={{height: '64px'}}> 
            <CheckBox checked={completed} onClick={toggleCompletion} />
             <ListItemText style={{textDecoration: completed && 'line-through'}}>{task}</ListItemText>
-            {tags.map(tag => <Tags tags={tags} id={tag.id} tag={tag.text} addTags={addTags} removeTags={removeTags}/>)}
             <ListItemSecondaryAction>                
                 <IconButton className={classes.buttons} color='primary' aria-label="Edit" onClick={toggleEdit} >
                     <EditIcon />
@@ -62,6 +61,7 @@ export default function Todo(props) {
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>}
+        {tags.map((tag, id) => <Tags tags={tags} tag={tag} id={id} addTags={addTags} removeTag={() => this.removeTag.bind(this, tag)}/>)}
         </List>
     );
 }

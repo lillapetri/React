@@ -3,9 +3,9 @@ const Todo = require("./models/todo");
 const User = require("./models/user");
 
 const data = [
-    {task: 'This is the first todo', completed: true},
-    {task: 'This is the second todo', completed: false},
-    {task: 'This is the third todo', completed: false},
+    {task: 'This is the first todo', tags: ['tag1', 'tag2'], completed: true},
+    {task: 'This is the second todo', tags: ['tag3'], completed: false},
+    {task: 'This is the third todo',tags: ['tag1', 'tag3'], completed: false},
     {task: 'This is the fourth todo', completed: false}
 ]
 
