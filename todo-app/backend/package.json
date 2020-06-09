@@ -4,9 +4,11 @@
     "description": "MERN stack Todo App",
     "main": "server.js",
     "scripts": {
-        "react-todo-app-install": "npm install --prefix react-todo-app",
+        "client-install": "cd react-todo-app && npm install",
         "start": "node server.js",
-        "server": "nodemon server.js"
+        "server": "nodemon server.js",
+        "client": "cd.. && cd react-todo-app && npm start",
+        "dev": "concurrently \"npm run server\" \"npm run client\" "
     },
     "author": "Lilla Petri",
     "license": "ISC",
