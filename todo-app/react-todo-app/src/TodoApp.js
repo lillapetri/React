@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Divider from "@material-ui/core/Divider";
 import {v4 as uuid} from 'uuid';
 import * as apiCalls from './APIs/TodoAPI';
 import Todo from './Todo';
@@ -19,7 +18,7 @@ class TodoApp extends Component {
     }
 
     async loadTodos(){
-        let todos = await apiCalls.getTodos();
+        let todos = await apiCalls.getTodos(this.props.id);
         this.setState({todos: todos});
     }
     async addTodo(val){
@@ -60,10 +59,9 @@ class TodoApp extends Component {
     
     render() {
         const todos = this.state.todos.map((todo, i) => (
-            <React.Fragment>
-            {i < this.state.todos.length && <Divider />}
+           
             <Todo
-                key={uuid()}
+                key={todo._id}
                 id={todo._id}
                 {...todo}
                 task={todo.task} 
@@ -72,8 +70,6 @@ class TodoApp extends Component {
                 deleteTodo={this.deleteTodo.bind(this, todo._id)} // can't bind the method in the constructor, because it also needs unique data from each todo item (in this case the id)
                 toggleCompletion={this.toggleCompletion.bind(this, todo)}
               />
-              
-            </React.Fragment>
           ));
         
         return(

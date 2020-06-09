@@ -1,10 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {width, height} from '../hooks/useWindowSize';
-
 import styles from '../styles/LandingPageStyles';
-import { Button } from '@material-ui/core';
 
 function LandingPage(props){
     const {classes }= props;

@@ -12,6 +12,12 @@ export async function getTodos(){
   })
 }
 
+export async function getTodo(id){
+  return axios.get(API_URL + id)
+  .then( res => console.log(res))
+  .catch(err => console.log(err));
+}
+
 export async function createTodo(val){
   return axios.post(API_URL, val)
   .then(response => response.data)

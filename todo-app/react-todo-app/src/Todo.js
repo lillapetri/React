@@ -9,9 +9,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import EditTodo from './todoModifiers/EditTodo';
 import useToggleState from './hooks/UseToggleState';
 import Tags from './Tags';
-import {v4 as uuid} from 'uuid';
 import { List } from '@material-ui/core';
-import { updateTodo } from './APIs/TodoAPI';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -31,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Todo(props) {
     const classes = useStyles();
     const [isEditing, toggleEdit] = useToggleState();
-    const {todo, task, _id, tags, completed, deleteTodo, updateTodo, addTodo, toggleCompletion} = props;
+    const {todo, task, _id, tags, completed, deleteTodo, updateTodo, toggleCompletion} = props;
     const removeTags = (id) => {
         /* if (!e) var e = window.event;
         e.cancelBubble = true;

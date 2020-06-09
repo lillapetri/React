@@ -1,9 +1,8 @@
 const express = require("express");
 const todoRoutes  = express.Router();
 const Todo = require("../models/todo");
-const db = 'mongodb://localhost:27017/todo_v1';
-const ObjectId = require('mongodb').ObjectID
-
+const db = require('../config/mongo_keys').mongoURI;
+const ObjectId = require('mongodb').ObjectID;
 
 // All todos
 todoRoutes.route('/').get( (req,res) => {
@@ -20,13 +19,20 @@ todoRoutes.route('/').get( (req,res) => {
 todoRoutes.route('/:id').get((req,res) => {
 	var id = ObjectId(req.params.id);
 	console.log(req.params);
-    Todo.findById(id, (err, todo) =>{
+	Todo.findById(id, (err, todo) => {
+		if(err || !todo){
+			console.log('no todo found');
+		}
+		console.log(todo);
+		res.json(todo);
+	})
+});
+		/* , (err, todo) =>{
 		if(err){res.json(err.message)}
 		if(!todo){console.log('There is no todo with the given id.')}
 		res.json(todo);
-		console.log(todo);
-	});
-});
+		console.log(todo); */
+	
 
 // Create new todo
 todoRoutes.route('/').post((req,res) => {
@@ -34,7 +40,7 @@ todoRoutes.route('/').post((req,res) => {
 	console.log(todo);
 	todo.save(db)
 	.then(() => {
-		res.json('Todo saved.')
+		res.json(todo + 'saved succesfully.')
 	})	
 	.catch( err => {
 		res.json(err.message);

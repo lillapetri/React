@@ -13,11 +13,9 @@ class CreateTodo extends Component {
         super(props);
 
         this.state = {
-            id: '',
             task: '',
             tags: [],
             completed: false, 
-            createdAt: '',
             author: {
                 id: '',
                 userName: ''
@@ -38,11 +36,9 @@ class CreateTodo extends Component {
         
         // reset input
         this.setState({
-            id: '',
             task: '',
             tags: [],
             completed: false, 
-            createdAt: '',
             author: '' 
         })
     }

@@ -3,9 +3,8 @@ import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import {v4 as uuid} from 'uuid';
 
-import * as apiCalls from '../APIs/TodoAPI';
+
 import axios from 'axios';
 
 import Tags from '../Tags';
