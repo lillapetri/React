@@ -12,6 +12,7 @@ const todoRoutes = require("./routes/todos");
 const indexRoutes = require("./routes/index");
 const tagRoutes = require('./routes/tags');
 const testAPIRoute = require('./routes/testAPI');
+const config = require('config');
 
 // Run app on configured port
 app.listen(PORT, () => {
@@ -45,7 +46,7 @@ app.use(function(err, req, res, next){
 });
 
 // Configure MongoDB
-const db = require('./config/mongo_keys').mongoURI;
+const db = config.get('mongoURI');
 // Connect database with Mongoose
 mongoose
   .connect(db, {

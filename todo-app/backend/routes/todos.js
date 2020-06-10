@@ -1,11 +1,12 @@
 const express = require("express");
 const todoRoutes  = express.Router();
+const auth = require('../middelware/auth');
 const Todo = require("../models/todo");
 const db = require('../config/mongo_keys').mongoURI;
 const ObjectId = require('mongodb').ObjectID;
 
 // All todos
-todoRoutes.route('/').get( (req,res) => {
+todoRoutes.get('/', (req,res) => {
     Todo.find({}, (err, allTodos) => {
 		if(err){
 			console.log(err);
@@ -16,7 +17,7 @@ todoRoutes.route('/').get( (req,res) => {
 });
 
 // Show infos about one todo
-todoRoutes.route('/:id').get((req,res) => {
+todoRoutes.get('/:id', (req,res) => {
 	Todo.findById(req.params.id, (err, todo) => {
 		if(err){res.json(err)};
 		if(!todo){res.json('No todo found with id: ' + req.params.id)};
@@ -25,16 +26,15 @@ todoRoutes.route('/:id').get((req,res) => {
 });
 
 // Create new todo
-todoRoutes.route('/').post((req,res) => {
-	const todo = new Todo(req.body);
-	console.log(todo);
-	todo.save(db)
-	.then(() => {
-		res.json(todo + 'saved succesfully.')
-	})	
-	.catch( err => {
-		res.json(err.message);
-	});
+todoRoutes.post('/', auth, async (req,res) => {
+	const newTodo = new Todo(req.body);
+	try {
+		const todo = await newTodo.save();
+		if (!todo) throw Error('Something went wrong while saving new todo.');
+		res.status(200).json(todo);
+	  } catch (e) {
+		res.status(400).json({ message: e.message });
+	  }
 });
 
 // Update todo
@@ -51,8 +51,8 @@ todoRoutes.route('/:id').put((req,res) => {
 });
 
 // Delete todo
-todoRoutes.delete("/:id", (req, res) => {
-	var query = { _id: req.params.id};
+todoRoutes.delete('/:id', auth, (req, res) => {
+	const query = { _id: req.params.id};
 	Todo.remove(query, (err) => {
 		if(err) {res.json(err.message)};
 		if(!query) {res.json('No todo found')};

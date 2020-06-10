@@ -3,14 +3,7 @@ const API_URL = 'http://localhost:4000/users/';
 
 // Create new user in the database
 export async function signUp(req){
-    let obj = {
-        firstName: req.firstName,
-        lastName: req.lastName,
-        email: req.email,
-        username: req.username,
-        password: req.password
-    }
-  return axios.post(API_URL, obj)
+  return axios.post(API_URL, req.body)
   .then(response => console.log(response.data))
   .catch(err => console.log(err.message));
 }

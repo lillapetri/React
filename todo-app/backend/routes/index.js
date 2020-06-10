@@ -1,9 +1,11 @@
 const express = require("express");
 const indexRoutes  = express.Router();
+const auth = require('../middelware/auth');
 const db = require('../config/mongo_keys').mongoURI;
-const ObjectId = require('mongodb').ObjectID
 const User = require("../models/user");
 const bcrypt = require('bcryptjs');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 
 // Show all users
 indexRoutes.route('/').get( (req,res) => {
@@ -41,13 +43,22 @@ indexRoutes.route('/').post((req,res) => {
 					newUser.password = hash;
 					newUser.save(db)
 						.then(user => {
-							res.json({
-								user: {
-									id: user.id,
-									username: user.username,
-									email: user.email
+							jwt.sign(
+								{ id: user.id },
+								config.get('jwtSecret'),
+								{ expiresIn: 3600 },
+								(err, token) => {
+									if(err) throw err;
+									res.json({
+										token,
+										user: {
+											id: user.id,
+											username: user.username,
+											email: user.email
+										}
+									})
 								}
-							})
+							)
 						})
 				})
 			})
@@ -55,33 +66,50 @@ indexRoutes.route('/').post((req,res) => {
 		})
 });
 
-/* // Create new User
-indexRoutes.route('/').post((req,res) => {
-	let user = new User(req.body);
-	user.save(db)
-	.then(() => {
-		res.json('User saved.')
-	})	
-	.catch( err => {
-		res.send(err.message);
-	});
-});
- */
-// Edit user data
-indexRoutes.route('/:id').put((req,res) => {
-	var id = ObjectId(req.params.id);
-	const obj = Object.assign({}, req.body);
-	User.findByIdAndUpdate(id, obj)
-	.then((response) => {
-		res.send(response)
-	})
-	.catch( err => {
-		res.send(err.message);
-	});
+// Login
+indexRoutes.route('/login').post((req,res) => {
+	const { email, password } = req.body;
+	// Validation
+	if(!email || !password){
+		return res.status(400).json({ message: 'Please enter all fields. '})
+	}
+	// Search for user
+	User.findOne({ email })
+		.then(user => {
+			if(!user) return res.status(400).json({ message: 'User does not exist.'})
+			
+			// Validate password
+			const isMatch = bcrypt.compare(password, user.password)
+			if(!isMatch) return res.status(400).json({ message: 'Invalid password.'})
+			jwt.sign(
+				{ id: user.id },
+				config.get('jwtSecret'),
+				{ expiresIn: 3600 },
+				(err, token) => {
+					if(err) throw err;
+					res.json({
+						token,
+						user: {
+							id: user.id,
+							username: user.username,
+							email: user.email
+						}
+					})
+				}
+			)
+			
+		})
 });
 
+// Acces user data
+indexRoutes.get('/user', auth, (req, res) => {
+	User.findById(req.user.id)
+		.select('-password')
+		.then(user => res.json(user));
+})
+
 // Delete User
-indexRoutes.delete("/:id", (req, res) => {
+indexRoutes.delete('/:id', auth, (req, res) => {
 	var query = { _id: req.params.id};
 	User.remove(query, (err) => {
 		if(err) {res.send(err.message)};

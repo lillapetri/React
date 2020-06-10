@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://pelvaaf:p@ssw0rd@pelvaaf-bhtyd.mongodb.net/pelvaaf?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://pelvaaf:p@ssw0rd@pelvaaf-bhtyd.mongodb.net/pelvaaf?retryWrites=true&w=majority",
+    "jwtSecret": "mErN_t0d0AppSecret"
 }
