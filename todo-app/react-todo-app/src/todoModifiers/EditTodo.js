@@ -3,13 +3,14 @@ import { Switch } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import axios from 'axios';
 
 import * as apiCalls from '../APIs/TagAPI';
+import Tags from '../Tags';
 
-export default class EditTodo extends Component {
-
+class EditTodo extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +20,7 @@ export default class EditTodo extends Component {
             completed: false, 
             createdAt: ''
         }
+        this.onTagSubmit = this.onTagSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -40,46 +42,41 @@ export default class EditTodo extends Component {
         });
     }
 
-    handleTagSubmit = (evt) => {
-        let tag = {text: this.setState.newTag, todo: this.props.task};
-        if(tag) {
-            apiCalls.createTag(tag)
-        }
+    onTagSubmit(evt){
+        evt.stopPropagation();
+        const tag = Object.assign({}, {
+            "text": this.state.newTag, "todo": this.props.id
+        })
+        apiCalls.createTag(tag);
+        apiCalls.getTags();
     }
     
-    onSubmit = (e) => {
+    onSubmit = (evt) => {
+        evt.stopPropagation();
         const obj = Object.assign({}, {  
             _id: this.props._id,
             task: this.state.task,
-            tags: [...this.state.tags, this.state.newTag],
             completed: this.state.completed,
             createdAt: this.state.createdAt
         });
-        this.handleTagSubmit();
+        console.log(obj);
         axios.put('http://localhost:4000/todos/' + this.props.id, obj)
             .then( res => console.log(res.data))
             .catch(err => console.log(err.message, this.props.id));
-        window.location.reload(); 
+        
     }
 
     render() {
-        const {task, completed, newTag} = this.state;
+        const {task, completed, tags, newTag} = this.state;
         return (
-                <FormGroup onSubmit={this.onSubmit}>
+            <FormGroup>
+                <form onSubmit={this.onSubmit}>
                         <TextField 
                         fullWidth
                         type="text" 
                         name='task'
                         className="form-control"
                         value={task}
-                        onChange={this.handleChange}
-                        />
-                        <TextField 
-                        fullWidth
-                        type="text" 
-                        name='newTag'
-                        label='Add a new tag'
-                        value={newTag}
                         onChange={this.handleChange}
                         />
                         <Switch 
@@ -94,9 +91,25 @@ export default class EditTodo extends Component {
                             {completed ? 'Completed' : 'Unfinished'}
                         </label>
                         <IconButton variant="outlined" color='primary' type="submit" onClick={this.onSubmit} > 
-                            <CheckCircleIcon />
+                           <CheckCircleIcon />
                         </IconButton>
-                </FormGroup>
+                </form>
+                <form onSubmit={this.onTagSubmit}>
+                <input 
+                text={newTag}
+                type="text" 
+                name='newTag'
+                label='Add a new tag'
+                placeholder='Add a new tag'
+                value={newTag}
+                onChange={this.handleChange}
+                />
+                <IconButton variant="outlined" color='primary' type="submit" onClick={this.onTagSubmit} > 
+                    <AddCircleIcon />
+                </IconButton>
+                </form>
+            </FormGroup>
         )
     }
 }
+export default EditTodo;

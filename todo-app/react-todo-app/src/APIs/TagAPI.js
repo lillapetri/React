@@ -18,14 +18,22 @@ export function getTag(id){
   .catch(err => console.log(err));
 }
 
-export async function createTag(tag){
-  return axios.post(API_URL, tag)
+export function createTag(obj){
+  return axios({
+    method: 'post',
+    url: API_URL + obj.todo,
+    data: {"text" : obj.text}
+  })
   .then(response => response.data)
   .catch(err => console.log(err.message));
 }
 
-export function removeTag(id) {
-    axios.delete(API_URL + id)
+export function removeTag(obj) {
+  return axios({
+    method: 'delete',
+    url: API_URL + obj.id,
+    data: obj
+  })
     .then( response => console.log(response.data))
     .catch(err => console.log(err.message));
 }

@@ -17,7 +17,8 @@ tagRoutes.route('/').get( (req,res) => {
 });
 
 // Create new tag
-tagRoutes.route('/:todoId').post((req,res) => {
+tagRoutes.route('/:id').post((req,res) => {
+	console.log(req.params);
 	//lookup todo using ID
 	Todo.findById(req.params.id, function(err, todo){
 		if(err || !todo){
@@ -27,9 +28,6 @@ tagRoutes.route('/:todoId').post((req,res) => {
 				if(err || !tag){
 					res.json(err);
 				} else {
-					//add username and id to tag
-					tag.todo = req.params.id;
-					tag.text = req.body.text;
 					//save tag
 					tag.save()
 					todo.tags.push(tag);
@@ -43,13 +41,14 @@ tagRoutes.route('/:todoId').post((req,res) => {
 
 
  // tag DESTROY ROUTE
- tagRoutes.delete("/:tagId", function(req, res){
+ tagRoutes.delete("/:id", function(req, res){
      //findByIdAndRemove
-     Tag.findByIdAndRemove(req.params.id, function(err, tag){
+     Tag.findByIdAndRemove(req.body.id, function(err, tag){
         if(err){
             res.json(err.message);
         } else {
-			Todo.findById(tag.todo, (err, todo) =>{
+			console.log(req.body);
+			Todo.findById(req.body.todoId, (err, todo) =>{
 				if(err){res.json(err)};
 				if(!todo){res.json('No todo found. Couldn\'t remove tag from todos.')};
 				todo.tags.splice(todo.tags.indexOf(tag));

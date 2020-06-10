@@ -31,21 +31,9 @@ export default function Todo(props) {
     const classes = useStyles();
     const [isEditing, toggleEdit] = useToggleState();
     
-    const addTags = (e)=> {
-        /* if (e.target.value !== "") {
-            setTags({tags: [...tags, e.target.value]});
-            //tags([...tags, e.target.value]);
-            e.target.value = "";
-            e.stopPropagation();
-        } */
-    };
-    const removeTag = (id) => {
-        apiCalls.removeTag(id);
-    }
-
     return (
         <List className={classes.root}>
-        { isEditing ? <EditTodo {...todo} task={task} id={_id} tags={tags} completed={completed} addTags={addTags} updateTodo={updateTodo}/> :
+        { isEditing ? <EditTodo {...todo} task={task} id={_id} tags={tags} completed={completed} updateTodo={updateTodo}/> :
         <ListItem style={{height: '64px'}}> 
            <CheckBox checked={completed} onClick={toggleCompletion} />
             <ListItemText style={{textDecoration: completed && 'line-through'}}>{task}</ListItemText>
@@ -58,7 +46,7 @@ export default function Todo(props) {
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>}
-        {tags.length !== 0 && tags.map(tag => <Tags removeTag={() => removeTag(tag._id)} tags={tags} key={tag._id} tag={tag.text} id={tag._id} addTags={addTags} />)}
+        {tags.length !== 0 && tags.map(tag => <Tags tags={tags} key={tag._id} tag={tag.text} id={tag._id} todoId={_id} />)}
         </List>
     );
 }

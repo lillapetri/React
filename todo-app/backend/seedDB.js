@@ -92,12 +92,11 @@ function seedDB(){
         }
         console.log("Removed tags!");
         Tag.create({
-            text: "Tag from seedDB", 
-            todo: "This is the third todo"}, function(err, tag){
+            text: "Tag from seedDB"}, function(err, tag){
             if(err){
                 console.log(err);
             } else {
-                Todo.findOne({task: "This is the third todo"}, function(err, todo){
+                Todo.findOne({task: "This is the first todo"}, function(err, todo){
                     if(err){
                         console.log(err);
                     } else {
