@@ -13,7 +13,6 @@ const indexRoutes = require("./routes/index");
 const tagRoutes = require('./routes/tags');
 const testAPIRoute = require('./routes/testAPI');
 
-const { MONGO_URI, MONGO_DB_NAME } = require('./config');
 // Run app on configured port
 app.listen(PORT, () => {
     console.log('Server is running on port ' + PORT);
