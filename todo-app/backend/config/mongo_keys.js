@@ -1,3 +1,3 @@
 module.exports = {
-    mongoURI: 'mongodb://localhost:27017/todo_app'
+    mongoURI: 'mongodb+srv://pelvaaf:p@ssw0rd@pelvaaf-bhtyd.mongodb.net/pelvaaf?retryWrites=true&w=majority'
 };

@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 const seedDB = require("./seedDB");
 const path = require('path');
 const createError = require('http-errors');
@@ -7,14 +8,12 @@ const cors = require('cors')
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 4000;
-
 const todoRoutes = require("./routes/todos");
 const indexRoutes = require("./routes/index");
 const tagRoutes = require('./routes/tags');
 const testAPIRoute = require('./routes/testAPI');
 
-// const tagRoutes = require("./routes/tags");
-
+const { MONGO_URI, MONGO_DB_NAME } = require('./config');
 // Run app on configured port
 app.listen(PORT, () => {
     console.log('Server is running on port ' + PORT);
@@ -26,7 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // Connect routes to server.js
 app.use('/', testAPIRoute);
-app.use('/users', indexRoutes);
+app.use('/index', indexRoutes);
 app.use('/todos', todoRoutes);
 app.use('/tags', tagRoutes);
 
@@ -48,15 +47,15 @@ app.use(function(err, req, res, next){
 
 // Configure MongoDB
 const db = require('./config/mongo_keys').mongoURI;
-
 // Connect database with Mongoose
-mongoose.connect(db,{
-	useNewUrlParser: true,
+mongoose
+  .connect(db, {
+    useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
-	})
-	.then(() => console.log('Mongo connected'))
-	.catch( err => console.log(err))
+  }) // Adding new mongo url parser
+  .then(() => console.log('Mongo client connected.'))
+  .catch(err => console.log(err));
 
 // Populate database with initial data
 seedDB();

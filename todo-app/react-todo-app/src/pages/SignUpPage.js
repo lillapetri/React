@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import {LoginContext} from '../contexts/LoginContext';
 import * as apiCalls from '../APIs/AuthAPI';
 
 function Copyright() {
@@ -57,13 +58,19 @@ class SignUp extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
   handleSignUp = (e) => {
-    e.preventDefault();
+    this.context.toggleLogin();
     let obj = Object.assign({}, this.state);
     apiCalls.signUp(obj);
+    window.localStorage.setItem(
+        'user', 
+        JSON.stringify(this.state.username)
+    );
     this.props.history.push('/todos');
   }
 
+  static contextType = LoginContext;
   render() {
+    const { isLoggedIn, toggleLogin } = this.context;
     const classes = this.props;
     return (
       

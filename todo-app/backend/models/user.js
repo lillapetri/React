@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
 
 const User = new mongoose.Schema({
-    username: { type: String, unique: true, required: true },
-    password: {type: String, required: true},
     firstName: String,
     lastName: String,
     email: { type: String, unique: true, required: true },
-    resetPasswordToken: String,
-    resetPasswordExpires: Date,
+    username: { type: String, unique: true, required: true },
+    password: {type: String, required: true},
     register_date: { type: Date, default: Date.now },
     isAdmin: { type: Boolean, default: false }
 });

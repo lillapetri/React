@@ -16,8 +16,8 @@ export async function signUp(req){
 }
 
 // Search for user data about one particular user
-export async function logIn(id){
-    return axios.post(API_URL + id)
+export async function logIn(name){
+    return axios.post(API_URL + name)
     .then(res => console.log(res))
     .catch(err => console.log(err));
   }

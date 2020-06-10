@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Todo = require("./models/todo");
 const User = require("./models/user");
 const Tag = require("./models/tag");
@@ -12,46 +11,14 @@ const data = [
 
 const users = [
     {
-        username: 'Lilla',
-        password: 'asdfg',
-        firstName: 'Lilla',
-        lastName: 'Petri',
-        email: 'test@email.com',
-        resetPasswordToken: '',
-        resetPasswordExpires: '',
-        isAdmin: false 
-    },
-    {
-        username: 'Lebo',
-        password: 'asdfg',
-        firstName: 'Lebo',
-        lastName: 'Petri',
-        email: 'test1@email.com',
-        resetPasswordToken: '',
-        resetPasswordExpires: '',
-        isAdmin: false 
-    },
-    {
-        username: 'Zebo',
-        password: 'asdfg',
-        firstName: 'Zebo',
-        lastName: 'Petri',
-        email: 'test2@email.com',
-        resetPasswordToken: '',
-        resetPasswordExpires: '',
-        isAdmin: false 
-    },
-    {
-        username: 'Cica',
-        password: 'asdfg',
-        firstName: 'Cica',
-        lastName: 'Petri',
-        email: 'test3@email.com',
-        resetPasswordToken: '',
-        resetPasswordExpires: '',
-        isAdmin: false 
+        username: 'testuser',
+        password: '12345',
+        firstName: 'first',
+        lastName: 'last',
+        email: 'test1@email.com'
     }
 ]
+
 function seedDB(){
     //Remove all todos
     Todo.remove({}, function(err){

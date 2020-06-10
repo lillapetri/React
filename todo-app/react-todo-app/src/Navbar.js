@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,7 +11,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
 import { Button } from '@material-ui/core';
 
-import useToggleState from './hooks/UseToggleState';
+import {LoginContext} from './contexts/LoginContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,12 +76,7 @@ ScrollTop.propTypes = {
 
 export default function BackToTop(props) {
   const classes = useStyles();
-  const [isLoggedIn, setLogin] = useToggleState();
-  const handleLogin = (e) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-    setLogin();
-  }
+  const {isLoggedIn, toggleLogin} = useContext(LoginContext)
   return (
     <React.Fragment>
       <CssBaseline />
@@ -92,7 +87,7 @@ export default function BackToTop(props) {
             {isLoggedIn ? 
             <> 
             <Typography color='inherit'>Welcome back!</Typography>
-            <Button className={classes.menuButton} color='inherit' disableTouchRipple onClick={handleLogin}>Log out</Button> 
+            <Button className={classes.menuButton} color='inherit' disableTouchRipple onClick={toggleLogin}>Log out</Button> 
             </>:
             <>
             <Button href='/signup' className={classes.menuButton} disableTouchRipple  color='inherit'>Sign up</Button>

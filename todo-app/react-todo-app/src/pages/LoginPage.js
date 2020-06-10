@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+
+import {LoginContext} from '../contexts/LoginContext';
+
 
 function Copyright() {
   return (
@@ -48,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const {isLoggedIn, toggleLogin} = useContext(LoginContext)
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,7 +63,7 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={toggleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -92,6 +96,7 @@ export default function Login() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={toggleLogin}
           >
             Sign In
           </Button>
