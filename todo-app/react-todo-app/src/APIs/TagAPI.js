@@ -1,8 +1,7 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:4000/todos/';
+const API_URL = 'http://localhost:4000/tags/';
 
-// Populate todolist from database
-export async function getTodos(){
+export async function getTags(){
   return axios.get(API_URL)
   .then(response => {
       console.log('Data received from database.');
@@ -13,32 +12,27 @@ export async function getTodos(){
   })
 }
 
-// Show info about one todo
-export async function getTodo(id){
+export function getTag(id){
   return axios.get(API_URL + id)
   .then( res => console.log(res))
   .catch(err => console.log(err));
 }
 
-// Create new todo
-export async function createTodo(val){
-  return axios.post(API_URL, val)
+export async function createTag(tag){
+  return axios.post(API_URL, tag)
   .then(response => response.data)
   .catch(err => console.log(err.message));
 }
 
-// Delete todo
-export function removeTodo(id) {
+export function removeTag(id) {
     axios.delete(API_URL + id)
     .then( response => console.log(response.data))
     .catch(err => console.log(err.message));
-    window.location.reload();
 }
 
-// Update edited todo
-export async function updateTodo(todo){
-    axios.put(API_URL + todo._id, todo)
-    .then(console.log(todo))
+export async function updateTag(tag){
+    axios.put(API_URL + tag._id, tag)
+    .then(console.log(tag))
     .then( res => console.log(res))
-    .catch(err => console.log(err.response, todo._id));
+    .catch(err => console.log(err.response, tag._id));
 }

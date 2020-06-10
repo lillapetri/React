@@ -17,22 +17,12 @@ todoRoutes.route('/').get( (req,res) => {
 
 // Show infos about one todo
 todoRoutes.route('/:id').get((req,res) => {
-	var id = ObjectId(req.params.id);
-	console.log(req.params);
-	Todo.findById(id, (err, todo) => {
-		if(err || !todo){
-			console.log('no todo found');
-		}
-		console.log(todo);
+	Todo.findById(req.params.id, (err, todo) => {
+		if(err){res.json(err)};
+		if(!todo){res.json('No todo found with id: ' + req.params.id)};
 		res.json(todo);
-	})
+	});
 });
-		/* , (err, todo) =>{
-		if(err){res.json(err.message)}
-		if(!todo){console.log('There is no todo with the given id.')}
-		res.json(todo);
-		console.log(todo); */
-	
 
 // Create new todo
 todoRoutes.route('/').post((req,res) => {
@@ -47,6 +37,7 @@ todoRoutes.route('/').post((req,res) => {
 	});
 });
 
+// Update todo
 todoRoutes.route('/:id').put((req,res) => {
 	var id = ObjectId(req.params.id);
 	const obj = Object.assign({}, req.body);

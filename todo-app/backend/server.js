@@ -10,7 +10,9 @@ const PORT = process.env.PORT || 4000;
 
 const todoRoutes = require("./routes/todos");
 const indexRoutes = require("./routes/index");
-const testAPIRouter = require('./routes/testAPI');
+const tagRoutes = require('./routes/tags');
+const testAPIRoute = require('./routes/testAPI');
+
 // const tagRoutes = require("./routes/tags");
 
 // Run app on configured port
@@ -23,9 +25,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Connect routes to server.js
-app.use('/', testAPIRouter);
+app.use('/', testAPIRoute);
 app.use('/users', indexRoutes);
 app.use('/todos', todoRoutes);
+app.use('/tags', tagRoutes);
 
 // Catch 404 error and forward to error handler
 app.use(function(req, res, next){

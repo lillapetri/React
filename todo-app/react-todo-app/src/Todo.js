@@ -8,7 +8,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import EditTodo from './todoModifiers/EditTodo';
 import useToggleState from './hooks/UseToggleState';
-import useInputState from './hooks/UseInputState';
+import * as apiCalls from './APIs/TagAPI';
 import Tags from './Tags';
 import { List } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,13 +30,7 @@ export default function Todo(props) {
     const {todo, task, _id, tags, completed, deleteTodo, updateTodo, toggleCompletion} = props;
     const classes = useStyles();
     const [isEditing, toggleEdit] = useToggleState();
-    const [tagsArray, setTags, reset] = useInputState(tags);
     
-    const removeTag = (t) =>{
-        let updatedTags = tags.filter(tag => tag.id === t.id);
-        console.log(updatedTags);
-    }
-
     const addTags = (e)=> {
         /* if (e.target.value !== "") {
             setTags({tags: [...tags, e.target.value]});
@@ -45,7 +39,10 @@ export default function Todo(props) {
             e.stopPropagation();
         } */
     };
-    
+    const removeTag = (id) => {
+        apiCalls.removeTag(id);
+    }
+
     return (
         <List className={classes.root}>
         { isEditing ? <EditTodo {...todo} task={task} id={_id} tags={tags} completed={completed} addTags={addTags} updateTodo={updateTodo}/> :
@@ -61,7 +58,7 @@ export default function Todo(props) {
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>}
-        {tags.map((tag, id) => <Tags tags={tags} tag={tag} id={id} addTags={addTags} removeTag={() => this.removeTag.bind(this, tag)}/>)}
+        {tags.length !== 0 && tags.map(tag => <Tags removeTag={() => removeTag(tag._id)} tags={tags} key={tag._id} tag={tag.text} id={tag._id} addTags={addTags} />)}
         </List>
     );
 }

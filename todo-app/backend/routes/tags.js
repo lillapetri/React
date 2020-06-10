@@ -1,39 +1,61 @@
 var express = require("express");
-const db = 'mongodb://localhost:27017/todo_v1';
+const db = require('../config/mongo_keys').mongoURI;
+const ObjectId = require('mongodb').ObjectID
 var tagRoutes  = express.Router({mergeParams: true});
 var Todo = require("../models/todo");
 var Tag = require("../models/tag");
 
-// tag EDIT ROUTE
-tagRoutes.get("/:tag_id/edit", function(req, res){
-    tag.findById(req.params.tag_id, function(err, foundtag){
-       if(err){
-           res.redirect("back");
-       } else {
-         res.render("tags/edit", {todo: req.params.id, tag: foundtag});
-       }
-    });
- });
- 
- // tag UPDATE
- tagRoutes.put("/:tag_id", function(req, res){
-    tag.findByIdAndUpdate(req.params.tag_id, req.body.tag, function(err, updatedtag){
-       if(err){
-           res.redirect("back");
-       } else {
-           res.redirect("/" + req.params.id );
-       }
-    });
- });
- 
+// All tags
+tagRoutes.route('/').get( (req,res) => {
+    Tag.find({}, (err, alltags) => {
+		if(err){
+			console.log(err);
+		} else {
+            res.json(alltags);
+		}
+	});
+});
+
+// Create new tag
+tagRoutes.route('/:todoId').post((req,res) => {
+	//lookup todo using ID
+	Todo.findById(req.params.id, function(err, todo){
+		if(err || !todo){
+			console.log(err || 'No todo found.');
+		} else {
+			Tag.create(req.body, function(err, tag){
+				if(err || !tag){
+					res.json(err);
+				} else {
+					//add username and id to tag
+					tag.todo = req.params.id;
+					tag.text = req.body.text;
+					//save tag
+					tag.save()
+					todo.tags.push(tag);
+					todo.save();
+					res.json(`${tag} for ${tag.todo} created successfully.`);
+				}
+			})
+		}
+	})
+});
+
+
  // tag DESTROY ROUTE
- tagRoutes.delete("/:tag_id", function(req, res){
+ tagRoutes.delete("/:tagId", function(req, res){
      //findByIdAndRemove
-     tag.findByIdAndRemove(req.params.tag_id, function(err){
+     Tag.findByIdAndRemove(req.params.id, function(err, tag){
         if(err){
-            res.redirect("back");
+            res.json(err.message);
         } else {
-            res.redirect("/" + req.params.id);
+			Todo.findById(tag.todo, (err, todo) =>{
+				if(err){res.json(err)};
+				if(!todo){res.json('No todo found. Couldn\'t remove tag from todos.')};
+				todo.tags.splice(todo.tags.indexOf(tag));
+				todo.save();
+				res.json(tag + ' deleted succesfully.');
+			})
         }
      });
  });

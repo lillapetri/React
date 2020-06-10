@@ -1,14 +1,12 @@
 import React , { Component } from 'react';
+import { Switch } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-
-
 import axios from 'axios';
 
-import Tags from '../Tags';
-import { Switch } from '@material-ui/core';
+import * as apiCalls from '../APIs/TagAPI';
 
 export default class EditTodo extends Component {
 
@@ -41,6 +39,13 @@ export default class EditTodo extends Component {
           [evt.target.name]: evt.target.value
         });
     }
+
+    handleTagSubmit = (evt) => {
+        let tag = {text: this.setState.newTag, todo: this.props.task};
+        if(tag) {
+            apiCalls.createTag(tag)
+        }
+    }
     
     onSubmit = (e) => {
         const obj = Object.assign({}, {  
@@ -50,6 +55,7 @@ export default class EditTodo extends Component {
             completed: this.state.completed,
             createdAt: this.state.createdAt
         });
+        this.handleTagSubmit();
         axios.put('http://localhost:4000/todos/' + this.props.id, obj)
             .then( res => console.log(res.data))
             .catch(err => console.log(err.message, this.props.id));
@@ -59,9 +65,7 @@ export default class EditTodo extends Component {
     render() {
         const {task, completed, newTag} = this.state;
         return (
-            <div>
                 <FormGroup onSubmit={this.onSubmit}>
-                    <div className="form-group">
                         <TextField 
                         fullWidth
                         type="text" 
@@ -70,17 +74,14 @@ export default class EditTodo extends Component {
                         value={task}
                         onChange={this.handleChange}
                         />
-                    </div>
-                    <div>
                         <TextField 
                         fullWidth
                         type="text" 
                         name='newTag'
-                        label='Add tags'
+                        label='Add a new tag'
                         value={newTag}
                         onChange={this.handleChange}
                         />
-                    </div>
                         <Switch 
                         id="checkbox"
                         type="checkbox"
@@ -96,7 +97,6 @@ export default class EditTodo extends Component {
                             <CheckCircleIcon />
                         </IconButton>
                 </FormGroup>
-            </div>
         )
     }
 }

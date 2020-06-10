@@ -1,6 +1,6 @@
 const express = require("express");
 const indexRoutes  = express.Router();
-const db = 'mongodb://localhost:27017/todo_v1';
+const db = require('../config/mongo_keys').mongoURI;
 const ObjectId = require('mongodb').ObjectID
 const User = require("../models/user");
 

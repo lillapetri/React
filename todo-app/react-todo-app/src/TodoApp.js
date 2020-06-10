@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {v4 as uuid} from 'uuid';
 import * as apiCalls from './APIs/TodoAPI';
+import * as tagCalls from './APIs/TagAPI';
 import Todo from './Todo';
 import CreateTodo from './todoModifiers/CreateTodo';
 import { Paper, Grid } from '@material-ui/core';
@@ -18,7 +19,7 @@ class TodoApp extends Component {
     }
 
     async loadTodos(){
-        let todos = await apiCalls.getTodos(this.props.id);
+        let todos = await apiCalls.getTodos();
         this.setState({todos: todos});
     }
     async addTodo(val){
@@ -66,7 +67,7 @@ class TodoApp extends Component {
         this.setState({id: uuid(), task: e.target.value, createdAt: date})
         this.syncLocalStorage();
     };
-    
+        
     render() {
         const todos = this.state.todos.map((todo, i) => (
            
@@ -77,7 +78,6 @@ class TodoApp extends Component {
                 task={todo.task} 
                 completed={todo.completed} 
                 tags={todo.tags}
-               
                 deleteTodo={this.deleteTodo.bind(this, todo._id)} // can't bind the method in the constructor, because it also needs unique data from each todo item (in this case the id)
                 toggleCompletion={this.toggleCompletion.bind(this, todo)}
               />

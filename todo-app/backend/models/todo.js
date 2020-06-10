@@ -5,10 +5,14 @@ let Todo = new Schema({
     task: {
         type: String
     },
-    tags: { 
-        type: Array,
-        ref: 'Tag'       
-    },
+    tags: [
+        {
+        id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Tag'},
+        text: String     
+        },
+    ],
     completed: {
         type: Boolean
     },

@@ -2,14 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
  
 let Tag = new Schema({
-    text: String,
+    text: {type: String, required: true},
     todo: {
-    	id: {
-            type: String,
-            required: false,
-    		ref: "Todo"
-    	},
-    	task: String
+        type: Schema.Types.ObjectId,
+        ref: 'Todo'
     }
 });
  
