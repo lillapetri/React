@@ -48,7 +48,6 @@ class EditTodo extends Component {
             "text": this.state.newTag, "todo": this.props.id
         })
         apiCalls.createTag(tag);
-        apiCalls.getTags();
     }
     
     onSubmit = (evt) => {
@@ -59,7 +58,6 @@ class EditTodo extends Component {
             completed: this.state.completed,
             createdAt: this.state.createdAt
         });
-        console.log(obj);
         axios.put('http://localhost:4000/todos/' + this.props.id, obj)
             .then( res => console.log(res.data))
             .catch(err => console.log(err.message, this.props.id));
@@ -104,7 +102,7 @@ class EditTodo extends Component {
                 value={newTag}
                 onChange={this.handleChange}
                 />
-                <IconButton variant="outlined" color='primary' type="submit" onClick={this.onTagSubmit} > 
+                <IconButton variant="outlined" color='primary' type="submit"> 
                     <AddCircleIcon />
                 </IconButton>
                 </form>
