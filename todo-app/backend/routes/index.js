@@ -108,15 +108,15 @@ indexRoutes.get('/user', auth, (req, res) => {
 		.then(user => res.json(user));
 })
 
-// Delete User
-indexRoutes.delete('/:id', auth, (req, res) => {
-	var query = { _id: req.params.id};
+// Delete User -- not working yet 
+indexRoutes.delete('/username', (req, res) => {
+	var query = { username: req.body.username};
 	User.remove(query, (err) => {
-		if(err) {res.send(err.message)};
-		if(!query) {res.send('No User found')};
-		res.send('User deleted succefully.')		
+		if(err) {res.json(err)};
+		if(!query) {res.json({message: 'No User found'})};
+		res.json({message: 'User deleted succefully.'})		
 	})
-	.catch(err => res.send(err.message))
+	.catch(err => res.json(err))
 });
 
 

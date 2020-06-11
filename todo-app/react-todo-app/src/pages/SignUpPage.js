@@ -45,14 +45,12 @@ class SignUp extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
   handleSignUp = (e) => {
+    e.preventDefault();
     let obj = Object.assign({}, this.state);
     apiCalls.signUp(obj);
-    window.localStorage.setItem(
-        'user', 
-        JSON.stringify(this.state.username)
-    );
+    window.localStorage.setItem('user', this.state.username)
     window.location = '/todos';
-    this.props.history.push('/todos');
+    //this.props.history.push('/todos');
   }
 
   static contextType = LoginContext;

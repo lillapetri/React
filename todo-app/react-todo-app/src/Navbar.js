@@ -77,6 +77,7 @@ ScrollTop.propTypes = {
 export default function BackToTop(props) {
   const classes = useStyles();
   const name = localStorage.getItem('user');
+  const {isLoggedIn, logOut} = useContext(LoginContext);
   
   return (
     <React.Fragment>
@@ -85,10 +86,10 @@ export default function BackToTop(props) {
         <Toolbar>
           <Button className={classes.logo} color='inherit' href='/' >MERN Stack Todo App</Button>
           <div className={classes.navItems}>
-            {name ? 
+            {isLoggedIn ? 
             <> 
             <Typography color='inherit'>{name && `Welcome ${name}!`} </Typography>
-            <Button href='/' className={classes.menuButton} color='inherit' disableTouchRipple onClick={() => window.localStorage.removeItem('user')}>Log out</Button> 
+            <Button className={classes.menuButton} color='inherit' disableTouchRipple onClick={logOut}>Log out</Button> 
             </>:
             <>
             <Button href='/signup' className={classes.menuButton} disableTouchRipple  color='inherit'>Sign up</Button>
