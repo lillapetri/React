@@ -1,5 +1,5 @@
 <h1>MERN Stack Todo App</h1>
-<p>This project still in development.</p>
+<p>This project is still in development.</p>
 <h3>How to get started:</h3>
 <ol>
   <li>Clone the github repo.</li>
