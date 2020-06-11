@@ -7,40 +7,27 @@ import { withStyles } from '@material-ui/styles';
 import styles from '../styles/CreateTodoStyles';
 import { CardHeader, FormGroup } from '@material-ui/core';
 
+import * as apiCalls from '../APIs/TodoAPI';
+
 class CreateTodo extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            task: '',
-            tags: [],
-            completed: false, 
-            author: {
-                id: '',
-                userName: ''
-            }
-        }
+        this.state = {task: ''}
         this.onSubmit = this.onSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e){
-        this.setState({task: e.target.value});
     }
     
-    onSubmit(e){       
-        const obj = Object.assign({}, this.state);
-        this.props.addTodo(obj);
-        console.log('Form submitted.');
-        
-        // reset input
+    handleChange = (evt) => {
         this.setState({
-            task: '',
-            tags: [],
-            completed: false, 
-            author: '' 
-        })
+          [evt.target.name]: evt.target.value
+        });
+    }
+    onSubmit(e){     
+        const obj = Object.assign({}, this.state);
+        apiCalls.createTodo(obj);
+        console.log('Form submitted.');
+        // reset input
+        this.setState({task: ''})
     }
 
     render() {
@@ -51,6 +38,7 @@ class CreateTodo extends Component {
                 <form onSubmit={this.onSubmit}>
                     <div>
                         <TextField
+                        name='task'
                         label='New todo'
                         value={this.state.task}
                         onChange={this.handleChange}

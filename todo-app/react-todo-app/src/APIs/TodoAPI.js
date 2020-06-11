@@ -24,7 +24,7 @@ export async function getTodo(id){
 export async function createTodo(val){
   return axios.post(API_URL, val)
   .then(response => response.data)
-  .catch(err => console.log(err.message));
+  .catch(err => console.log(err));
 }
 
 // Delete todo

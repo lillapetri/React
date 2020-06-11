@@ -14,19 +14,6 @@ import Container from '@material-ui/core/Container';
 import {LoginContext} from '../contexts/LoginContext';
 import * as apiCalls from '../APIs/AuthAPI';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="/">
-        MERN Stack Todo App
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const styles = ({
   paper: {
     display: 'flex',
@@ -58,13 +45,13 @@ class SignUp extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
   handleSignUp = (e) => {
-    this.context.toggleLogin();
     let obj = Object.assign({}, this.state);
     apiCalls.signUp(obj);
     window.localStorage.setItem(
         'user', 
         JSON.stringify(this.state.username)
     );
+    window.location = '/todos';
     this.props.history.push('/todos');
   }
 
@@ -170,7 +157,14 @@ class SignUp extends Component {
           </form>
         </div>
         <Box mt={5}>
-          <Copyright />
+          <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+            <Link color="inherit" href="/">
+              MERN Stack Todo App
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+          </Typography>
         </Box>
       </Container>
     );

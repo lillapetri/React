@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import {LoginProvider, LoginContext} from './contexts/LoginContext';
 
 function App() {
+  
   return (
     <Router>
     <LoginProvider>

@@ -26,7 +26,7 @@ todoRoutes.get('/:id', (req,res) => {
 });
 
 // Create new todo
-todoRoutes.post('/', auth, async (req,res) => {
+todoRoutes.post('/', async (req,res) => {
 	const newTodo = new Todo(req.body);
 	try {
 		const todo = await newTodo.save();
@@ -51,7 +51,7 @@ todoRoutes.route('/:id').put((req,res) => {
 });
 
 // Delete todo
-todoRoutes.delete('/:id', auth, (req, res) => {
+todoRoutes.delete('/:id', (req, res) => {
 	const query = { _id: req.params.id};
 	Todo.remove(query, (err) => {
 		if(err) {res.json(err.message)};

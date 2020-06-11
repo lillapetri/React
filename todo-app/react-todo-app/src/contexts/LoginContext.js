@@ -5,11 +5,11 @@ export const LoginContext = createContext();
 export class LoginProvider extends Component {
     constructor(props){
         super(props);
-        this.state = {isLoggedIn: false};
-        this.toggleLogin = this.toggleLogin.bind(this);
+        this.state = {isLoggedIn: false };
     }
-    toggleLogin() {
-        this.setState({isLoggedIn: !this.state.isLoggedIn})
+    isLoggedIn(){
+        return localStorage.getItem('user') ;
+        
     }
     render() {
         return (
