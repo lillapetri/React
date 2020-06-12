@@ -32,7 +32,6 @@ export function removeTodo(id) {
     axios.delete(API_URL + id)
     .then( response => console.log(response.data))
     .catch(err => console.log(err.message));
-    window.location.reload();
 }
 
 // Update edited todo

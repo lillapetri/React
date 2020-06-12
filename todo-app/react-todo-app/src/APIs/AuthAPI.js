@@ -1,11 +1,11 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:4000/index/';
+export const API_URL = 'http://localhost:4000/index/';
 
 // Create new user in the database
 export async function signUp(obj){
-  return axios.post(API_URL, obj).then(res => {
-    window.localStorage.setItem('token', res.data.token) 
-  })
+  axios.post(API_URL, obj).then(res => res.status
+    /* window.localStorage.setItem('token', res.data.token)  */
+  )
     .catch(err => console.log(err.message));
 }
 
@@ -18,8 +18,9 @@ export function login(obj){
     headers: obj.headers
   })
   .then(res => {if(res.status === 200) {
-    localStorage.setItem('user', res.data.user.username);
-    window.location = '/todos'; }})
+    console.log(res)
+    /* localStorage.setItem('user', res.data.user.username);
+    window.location = '/todos';  */}})
   .catch(err => console.log(err) )
 }
 

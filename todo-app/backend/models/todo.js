@@ -14,12 +14,14 @@ let Todo = new Schema({
         },
     ],
     completed: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     createdAt: { type: Date, default: Date.now },
     author: {
         id: {
-        type: String
+            type: Schema.Types.ObjectId,
+            ref: 'User'
         },
         username: String
     }

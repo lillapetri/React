@@ -6,6 +6,13 @@ let Tag = new Schema({
     todo: {
         type: Schema.Types.ObjectId,
         ref: 'Todo'
+    },
+    author: {
+        id: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
     }
 });
  

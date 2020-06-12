@@ -8,7 +8,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import axios from 'axios';
 
 import * as apiCalls from '../APIs/TagAPI';
-import Tags from '../Tags';
+
 
 class EditTodo extends Component {
     constructor(props) {
@@ -65,7 +65,7 @@ class EditTodo extends Component {
     }
 
     render() {
-        const {task, completed, tags, newTag} = this.state;
+        const {task, completed, newTag} = this.state;
         return (
             <FormGroup>
                 <form onSubmit={this.onSubmit}>

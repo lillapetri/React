@@ -12,7 +12,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import {LoginContext} from '../contexts/LoginContext';
-import * as apiCalls from '../APIs/AuthAPI';
+import {API_URL} from '../APIs/AuthAPI';
+import axios from 'axios';
 
 const styles = ({
   paper: {
@@ -38,24 +39,38 @@ class SignUp extends Component {
       lastName: '',
       password: '',
       email: '',
-      id: ''
+      response: ''
     }
   }
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
   }
   handleSignUp = (e) => {
+    const self = this;
     e.preventDefault();
     let obj = Object.assign({}, this.state);
-    apiCalls.signUp(obj);
+    axios.post(API_URL, obj)
+      .then(res => {if(res.status){
+        localStorage.setItem('user', res.data.user.username);
+        window.location = '/todos';
+      }})
+      .catch(err => {
+        if(err.response.status) self.setState({response: err.response.data.message})
+      })
+
+  
+    
+    /* apiCalls.signUp(obj, (err, res) => {
+      if(err) console.log(err);
+      console.log(res);
+    }); 
     window.localStorage.setItem('user', this.state.username)
     window.location = '/todos';
-    //this.props.history.push('/todos');
+    this.props.history.push('/todos'); */
   }
 
   static contextType = LoginContext;
   render() {
-    const { isLoggedIn, toggleLogin } = this.context;
     const classes = this.props;
     return (
       
@@ -135,6 +150,7 @@ class SignUp extends Component {
                   label="Remember me"
                 />
               </Grid>
+              {this.state.response && <p style={{color: 'red'}}>{this.state.response}</p>}
             </Grid>
             <Button
               type="submit"

@@ -18,9 +18,10 @@ export class LoginProvider extends Component {
         window.location = '/';
     }
     render() {
+        const {children} = this.props;
         return (
         <LoginContext.Provider value={{...this.state, logOut: this.logOut}}>
-            {this.props.children}
+            {children}
         </LoginContext.Provider>
         )
     }

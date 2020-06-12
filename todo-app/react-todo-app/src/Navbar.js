@@ -43,9 +43,6 @@ const useStyles = makeStyles((theme) => ({
 function ScrollTop(props) {
   const { children, window } = props;
   const classes = useStyles();
-  // Note that you normally won't need to set the window ref as useScrollTrigger
-  // will default to window.
-  // This is only being set here because the demo is in an iframe.
   const trigger = useScrollTrigger({
     target: window ? window() : undefined,
     disableHysteresis: true,
@@ -88,13 +85,13 @@ export default function BackToTop(props) {
           <div className={classes.navItems}>
             {isLoggedIn ? 
             <> 
-            <Typography color='inherit'>{name && `Welcome ${name}!`} </Typography>
+            <Typography style={{padding: '0 1.5rem'}} color='inherit'>{name && `Welcome ${name}!`} </Typography>
+            <Button href='/todos' className={classes.menuButton} disableTouchRipple  color='inherit'>My todos</Button>
             <Button className={classes.menuButton} color='inherit' disableTouchRipple onClick={logOut}>Log out</Button> 
             </>:
             <>
             <Button href='/signup' className={classes.menuButton} disableTouchRipple  color='inherit'>Sign up</Button>
             <Button href='/login' className={classes.menuButton} color='inherit' disableTouchRipple>Log in</Button>
-            {/* <Button href='/todos' className={classes.menuButton} disableTouchRipple  color='inherit'>Try out</Button> */}
             </> }
           </div>
         </Toolbar>

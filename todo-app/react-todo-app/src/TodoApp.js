@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {v4 as uuid} from 'uuid';
 import * as apiCalls from './APIs/TodoAPI';
-import * as tagCalls from './APIs/TagAPI';
 import Todo from './Todo';
 import CreateTodo from './todoModifiers/CreateTodo';
 import { Paper, Grid } from '@material-ui/core';
@@ -11,20 +10,19 @@ class TodoApp extends Component {
         super(props);
         this.state = { 
             todos: [],
-            tags: []
+            tags: [],
+            searchTag: ''
         }
     } 
-    componentWillMount(){ // could the data fetch simply be put in the constructor instead?
+    componentWillMount(){ 
         this.loadTodos();
     }
-
     async loadTodos(){
         let todos = await apiCalls.getTodos();
-        this.setState({todos: todos});
+        this.setState({todos: todos });
     }
     async addTodo(val){
-        await apiCalls.createTodo(val);
-        //this.setState({todos: [this.state.todos, val]});
+        await apiCalls.createTodo(val);  
     }
     async toggleCompletion(todo){
         let todos = this.state.todos.map(t => 
@@ -35,23 +33,12 @@ class TodoApp extends Component {
         let index = updatedState.findIndex( t => t._id===todo._id)
         let todoToUpdate = updatedState[index];
         apiCalls.updateTodo(todoToUpdate);
-        //apiCalls.updateTodo(savedTodos);
     }
-    /* removeTag(tag){
-        let todos = this.state.todos.map(t => 
-            (t._id === todo._id) ? {...t, tags: } : t
-          );
-        await this.setState({todos: todos});
-        const updatedState = this.state.todos;
-        let index = updatedState.findIndex( t => t._id===todo._id)
-        let todoToUpdate = updatedState[index];
-        apiCalls.updateTodo(todoToUpdate);
-    }; */
-    
+
     deleteTodo(id){
         apiCalls.removeTodo(id);
         let filteredTodos = this.state.todos.filter(todo => todo._id !== id);
-        this.setState({todos: filteredTodos});
+        this.setState({todos: filteredTodos || window.localStorage.getItem('todos')});
     }
     componentDidUpdate() {
         this.syncLocalStorage();
@@ -67,9 +54,13 @@ class TodoApp extends Component {
         this.setState({id: uuid(), task: e.target.value, createdAt: date})
         this.syncLocalStorage();
     };
+
+    handleSearch = (e) => {
+        this.setState({searchTag: e.target.value})
+    }
         
     render() {
-        const todos = this.state.todos.map((todo, i) => (
+        const todos = this.state.todos.map( todo => (
            
             <Todo
                 key={todo._id}

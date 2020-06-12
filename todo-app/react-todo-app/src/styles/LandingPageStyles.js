@@ -27,7 +27,7 @@ export default ({
         color: 'rgba(20, 33, 105, .9)',
         width: '65%',
         position: 'fixed',
-        top: '40%',
+        top: '35%',
         bottom: '50%',
         right: '0',
     }    

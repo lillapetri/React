@@ -8,7 +8,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import EditTodo from './todoModifiers/EditTodo';
 import useToggleState from './hooks/UseToggleState';
-import * as apiCalls from './APIs/TagAPI';
 import Tags from './Tags';
 import { List } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -47,7 +46,9 @@ export default function Todo(props) {
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>}
-        {tags.length !== 0 && tags.map(tag => <Tags tags={tags} key={tag._id} tag={tag.text} id={tag._id} todoId={_id} />)}
+        {tags.length !== 0 && tags.map((tag, i) => 
+            <Tags tags={tags} tag={tag.text} id={tag._id} todoId={_id} />
+        )}
         </List>
     );
 }
