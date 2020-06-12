@@ -75,28 +75,28 @@ indexRoutes.route('/login').post((req,res) => {
 	}
 	// Search for user
 	User.findOne({ email })
-		.then(user => {
+		.then(async user => {
 			if(!user) return res.status(400).json({ message: 'User does not exist. Please sign up.'})
-			
 			// Validate password
-			const isMatch = bcrypt.compare(password, user.password)
-			if(!isMatch) return res.status(400).json({ message: 'Invalid password.'})
-			jwt.sign(
-				{ id: user.id },
-				config.get('jwtSecret'),
-				{ expiresIn: 3600 },
-				(err, token) => {
-					if(err) throw err;
-					res.json({
-						token,
-						user: {
-							id: user.id,
-							username: user.username,
-							email: user.email
-						}
-					})
-				}
-			)
+			const isMatch = await bcrypt.compare(password, user.password)
+			if(isMatch) {
+				jwt.sign(
+					{ id: user.id },
+					config.get('jwtSecret'),
+					{ expiresIn: 3600 },
+					(err, token) => {
+						if(err) throw err;
+						res.json({
+							token,
+							user: {
+								id: user.id,
+								username: user.username,
+								email: user.email
+							}
+						})
+					}
+				)
+			} else { return res.status(400).json({ message: 'Invalid password.'})}
 			
 		})
 });
