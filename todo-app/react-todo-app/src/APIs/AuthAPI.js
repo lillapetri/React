@@ -1,14 +1,6 @@
 import axios from 'axios';
 export const API_URL = 'http://localhost:4000/index/';
 
-// Create new user in the database
-export async function signUp(obj){
-  axios.post(API_URL, obj).then(res => res.status
-    /* window.localStorage.setItem('token', res.data.token)  */
-  )
-    .catch(err => console.log(err.message));
-}
-
 export function login(obj){
   const data = {
     email: obj.email,
