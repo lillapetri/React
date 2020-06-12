@@ -57,16 +57,6 @@ class SignUp extends Component {
       .catch(err => {
         if(err.response.status) self.setState({response: err.response.data.message})
       })
-
-  
-    
-    /* apiCalls.signUp(obj, (err, res) => {
-      if(err) console.log(err);
-      console.log(res);
-    }); 
-    window.localStorage.setItem('user', this.state.username)
-    window.location = '/todos';
-    this.props.history.push('/todos'); */
   }
 
   static contextType = LoginContext;
