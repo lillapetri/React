@@ -28,7 +28,7 @@ indexRoutes.route('/').post((req,res) => {
 	// Search for user
 	User.findOne({ email })
 		.then(user => {
-			if(user) return res.status(409).json({ message: 'User already exists.'})
+			if(user) return res.status(409).json({ message: 'User already exists. Please login.'})
 			const newUser = new User({
 				firstName,
 				lastName,

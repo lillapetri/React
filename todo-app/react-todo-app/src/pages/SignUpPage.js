@@ -140,7 +140,7 @@ class SignUp extends Component {
                   label="Remember me"
                 />
               </Grid>
-              {this.state.response && <p style={{color: 'red'}}>{this.state.response}</p>}
+              {this.state.response && <Typography style={{color: 'red', margin: '0 auto 1rem auto'}}>{this.state.response}</Typography>}
             </Grid>
             <Button
               type="submit"
