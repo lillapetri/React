@@ -10,10 +10,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import axios from 'axios';
 
-import * as apiCalls from '../APIs/AuthAPI';
-
-
+import {API_URL} from '../APIs/AuthAPI';
 
 const styles = (theme) => ({
   paper: {
@@ -38,7 +37,7 @@ const styles = (theme) => ({
 class Login extends Component {
   constructor(props){
     super(props);
-    this.state = {password: '', email: ''}
+    this.state = {password: '', email: '', response:''}
   }
   handleChange = (event) => {
     this.setState({[event.target.name]: event.target.value})
@@ -54,8 +53,16 @@ class Login extends Component {
       email: this.state.email,
       password: this.state.password
     })
-    console.log(obj);
-    apiCalls.login(obj);
+    axios.post(API_URL + '/login', obj)
+      .then(res => {if(res.status===200){
+        localStorage.setItem('user', res.data.user.username);
+        window.location = '/todos';
+      }})
+      .catch(err => {
+        if(err.response.status) this.setState({response: err.response.data.message})
+      })
+    
+            
   }
   
   render(){
@@ -95,6 +102,7 @@ class Login extends Component {
               id="password"
               autoComplete="current-password"
             />
+            {this.state.response && <Typography style={{color: 'red', margin: '0 auto 1rem auto'}}>{this.state.response}</Typography>}
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"

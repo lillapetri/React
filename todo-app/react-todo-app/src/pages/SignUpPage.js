@@ -50,7 +50,7 @@ class SignUp extends Component {
     e.preventDefault();
     let obj = Object.assign({}, this.state);
     axios.post(API_URL, obj)
-      .then(res => {if(res.status){
+      .then(res => {if(res.status===200){
         localStorage.setItem('user', res.data.user.username);
         window.location = '/todos';
       }})
