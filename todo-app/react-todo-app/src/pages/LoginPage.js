@@ -57,12 +57,11 @@ class Login extends Component {
       .then(res => {if(res.status===200){
         localStorage.setItem('user', res.data.user.username);
         window.location = '/todos';
-      }})
+      }
+    })
       .catch(err => {
         if(err.response.status) this.setState({response: err.response.data.message})
-      })
-    
-            
+      })           
   }
   
   render(){
@@ -102,7 +101,7 @@ class Login extends Component {
               id="password"
               autoComplete="current-password"
             />
-            {this.state.response && <Typography style={{color: 'red', margin: '0 auto 1rem auto'}}>{this.state.response}</Typography>}
+            {this.state.response && <Typography color='secondary' style={{margin: '1rem auto 0 auto'}}>{this.state.response}</Typography>}
             {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"

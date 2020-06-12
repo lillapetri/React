@@ -28,7 +28,7 @@ indexRoutes.route('/').post((req,res) => {
 	// Search for user
 	User.findOne({ email })
 		.then(user => {
-			if(user) return res.status(409).json({ message: 'User already exists. Please login.'})
+			if(user) return res.status(409).json({ message: 'User already exists. Please log in.'})
 			const newUser = new User({
 				firstName,
 				lastName,
@@ -76,7 +76,7 @@ indexRoutes.route('/login').post((req,res) => {
 	// Search for user
 	User.findOne({ email })
 		.then(user => {
-			if(!user) return res.status(400).json({ message: 'User does not exist.'})
+			if(!user) return res.status(400).json({ message: 'User does not exist. Please sign up.'})
 			
 			// Validate password
 			const isMatch = bcrypt.compare(password, user.password)
