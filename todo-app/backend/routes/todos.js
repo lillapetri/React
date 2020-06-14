@@ -46,7 +46,6 @@ todoRoutes.get('/mytodos/:username/:id', (req,res) => {
 			Todo.findById(req.params.id, (err, todo) => {
 			if(err){res.json(err)};
 			if(!todo){res.status(404).json('No todo found with id: ' + req.params.id)};
-			console.log(todo);
 			res.status(200).json(todo);
 		});
 		}

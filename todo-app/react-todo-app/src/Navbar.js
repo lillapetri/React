@@ -93,6 +93,7 @@ export default function BackToTop(props) {
             <>
             <Button href='/signup' className={classes.menuButton} disableTouchRipple  color='inherit'>Sign up</Button>
             <Button href='/login' className={classes.menuButton} color='inherit' disableTouchRipple>Log in</Button>
+            <Button href='/todos' className={classes.menuButton} color='inherit' disableTouchRipple>Try out</Button>
             </> }
           </div>
         </Toolbar>

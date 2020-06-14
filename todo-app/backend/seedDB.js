@@ -9,16 +9,6 @@ const data = [
     {task: 'This is the fourth todo', completed: false}
 ]
 
-const users = [
-    {
-        username: 'testuser',
-        password: '12345',
-        firstName: 'first',
-        lastName: 'last',
-        email: 'test1@email.com'
-    }
-]
-
 function seedDB(){
     //Remove all todos
     Todo.remove({}, function(err){
@@ -37,22 +27,7 @@ function seedDB(){
                  
              });
          });
-    // Remove users
-    User.remove({}, function(err){
-        if(err){
-            console.log(err);
-        }
-        console.log("removed users!");
-        users.forEach(function(seed){
-            User.create(seed, function(err, todo){
-                if(err){
-                    console.log(err)
-                } else {
-                    console.log("Added a user.");
-                }
-            });
-        });
-    });
+  
     Tag.remove({}, function(err){
         if(err){
             console.log(err);

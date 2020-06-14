@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -10,16 +11,22 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 import {LoginContext} from '../contexts/LoginContext';
 import {API_URL} from '../APIs/AuthAPI';
 import axios from 'axios';
 
-const styles = ({
+const styles = (theme) => ({
   paper: {
+    marginTop: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     marginTop: '2rem',
@@ -47,7 +54,6 @@ class SignUp extends Component {
   }
   handleSignUp = (e) => {
     const self = this;
-    e.preventDefault();
     let obj = Object.assign({}, this.state);
     axios.post(API_URL, obj)
       .then(res => {if(res.status===200){
@@ -62,12 +68,15 @@ class SignUp extends Component {
 
   static contextType = LoginContext;
   render() {
-    const classes = this.props;
+    const {classes} = this.props;
     return (
       
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
+         <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
           <Typography style={{textAlign: 'center', padding: '1rem'}} component="h1" variant="h5">
             Sign up
           </Typography>
