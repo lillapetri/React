@@ -7,7 +7,7 @@ export default function Tags({tag, id, todoId}){
     const handleDelete = () => {
         let obj = {id: id, todoId: todoId}
         apiCalls.removeTag(obj);
-        window.location = '/todos';
+        window.location.reload();
      // I know this is not the best solution, but at least it's working
     }
     return (
