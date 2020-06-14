@@ -8,6 +8,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import axios from 'axios';
 
 import * as apiCalls from '../APIs/TagAPI';
+import {getTodo} from '../APIs/TodoAPI';
 
 
 class EditTodo extends Component {
@@ -17,20 +18,19 @@ class EditTodo extends Component {
             task: '',
             tags: [],
             newTag: '',
-            completed: false, 
-            createdAt: ''
+            completed: false
         }
         this.onTagSubmit = this.onTagSubmit.bind(this);
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/todos/' + this.props.id)
+        const {id} = this.props;
+        getTodo(id)
             .then( res => {
                 this.setState({
                     task: res.data.task,
                     tags: [...res.data.tags],
-                    completed: res.data.completed,
-                    createdAt: new Date()
+                    completed: res.data.completed
                 })
             })
             .catch( err => console.log(err));

@@ -58,7 +58,7 @@ mongoose
   .catch(err => console.log(err));
 
 // Populate database with initial data
-seedDB();
+seedDB(); // Comment seedDb out to avoid removing saved data when program starts
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

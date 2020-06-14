@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {headers, username, privateRoute, API_URL} from './constants';
+import {headers, API_URL} from './constants';
 
 // Populate todolist from database
 export async function getTodos(){
@@ -15,8 +15,8 @@ export async function getTodos(){
 
 // Show info about one todo
 export async function getTodo(id){
-  return axios.get(API_URL + id)
-  .then( res => console.log(res))
+  return axios.get(API_URL + id, headers)
+  .then( res => res)
   .catch(err => console.log(err));
 }
 

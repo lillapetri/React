@@ -18,7 +18,7 @@ todoRoutes.get('/', (req,res) => {
 });
 
 // All private todos
-todoRoutes.get('/:username', auth, (req,res) => {
+todoRoutes.get('/mytodos/:username', auth, (req,res) => {
 	const {username} = req.params;
     Todo.find({user: {username: username}, isPublic: false}, (err, allTodos) => {
 		if(err){
@@ -29,13 +29,30 @@ todoRoutes.get('/:username', auth, (req,res) => {
 	});
 });
 
-// Show infos about one todo
+// Show infos about one public todo
 todoRoutes.get('/:id', (req,res) => {
 	Todo.findById(req.params.id, (err, todo) => {
 		if(err){res.json(err)};
 		if(!todo){res.status(404).json('No todo found with id: ' + req.params.id)};
+		console.log(todo);
 		res.status(200).json(todo);
 	});
+});
+
+// Show infos about one private todo
+todoRoutes.get('/mytodos/:username/:id', (req,res) => {
+	User.find({username: req.params.username}, (err, user) => {
+		try {
+			Todo.findById(req.params.id, (err, todo) => {
+			if(err){res.json(err)};
+			if(!todo){res.status(404).json('No todo found with id: ' + req.params.id)};
+			console.log(todo);
+			res.status(200).json(todo);
+		});
+		}
+		catch(err) {console.log(err)}
+	})
+	
 });
 
 // Create new public todo
@@ -58,7 +75,7 @@ todoRoutes.post('/', async (req,res) => {
 });
 
 // Create new private todo
-todoRoutes.post('/:username', auth, async (req,res) => {
+todoRoutes.post('/mytodos/:username', auth, async (req,res) => {
 	const {task}= req.body;
 	const {username} = req.params;
 	const newTodo = new Todo({
