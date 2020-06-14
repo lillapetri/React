@@ -18,7 +18,6 @@ tagRoutes.route('/').get( (req,res) => {
 
 // Create new tag
 tagRoutes.route('/:id').post((req,res) => {
-	console.log(req.params);
 	//lookup todo using ID
 	Todo.findById(req.params.id, function(err, todo){
 		if(err || !todo){
@@ -32,7 +31,7 @@ tagRoutes.route('/:id').post((req,res) => {
 					tag.save()
 					todo.tags.push(tag);
 					todo.save();
-					res.json(`${tag} for ${tag.todo} created successfully.`);
+					res.status(200).json(`${tag} for ${tag.todo} created successfully.`);
 				}
 			})
 		}
@@ -53,7 +52,7 @@ tagRoutes.route('/:id').post((req,res) => {
 				if(!todo){res.json('No todo found. Couldn\'t remove tag from todos.')};
 				todo.tags.splice(todo.tags.indexOf(tag));
 				todo.save();
-				res.json(tag + ' deleted succesfully.');
+				res.status(200).json(tag + ' deleted succesfully.');
 			})
         }
      });

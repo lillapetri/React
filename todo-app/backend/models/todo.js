@@ -2,9 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Todo = new Schema({
-    task: {
-        type: String
-    },
+    task: String,
     tags: [
         {
         id: {
@@ -17,14 +15,17 @@ let Todo = new Schema({
         type: Boolean,
         default: false
     },
-    createdAt: { type: Date, default: Date.now },
-    author: {
+    user: {
         id: {
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
         username: String
+    },
+    isPublic: {
+        type: Boolean,
+        default: true
     }
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model('Todo', Todo);

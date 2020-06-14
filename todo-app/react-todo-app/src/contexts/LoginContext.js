@@ -5,7 +5,7 @@ export const LoginContext = createContext();
 export class LoginProvider extends Component {
     constructor(props){
         super(props);
-        this.state = {isLoggedIn: window.localStorage.getItem('user') === null? false : true};
+        this.state = {isLoggedIn: window.localStorage.getItem('user') !== null};
         this.toggleLogin = this.toggleLogin.bind(this);
         this.logOut = this.logOut.bind(this);
     }
@@ -14,6 +14,7 @@ export class LoginProvider extends Component {
     }
     logOut(){
         window.localStorage.removeItem('user');
+        window.localStorage.removeItem('token');
         this.toggleLogin();
         window.location = '/';
     }

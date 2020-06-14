@@ -52,6 +52,7 @@ class SignUp extends Component {
     axios.post(API_URL, obj)
       .then(res => {if(res.status===200){
         localStorage.setItem('user', res.data.user.username);
+        localStorage.setItem('token', res.data.token);
         window.location = '/todos';
       }})
       .catch(err => {

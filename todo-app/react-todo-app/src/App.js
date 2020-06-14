@@ -17,6 +17,7 @@ function App() {
       <Switch>
       <Route path='/' exact component={LandingPage} />
       <Route path='/todos' exact component={TodoApp} />
+      <Route path='/mytodos' exact component={TodoApp} />
       <Route path='/signup' exact component={SignUpPage} />
       <Route path='/login' exact component={LoginPage} />
       <Route component={page_404} />

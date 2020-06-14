@@ -46,8 +46,8 @@ export default function Todo(props) {
                 </IconButton>
             </ListItemSecondaryAction>
         </ListItem>}
-        {tags.length !== 0 && tags.map((tag, i) => 
-            <Tags tags={tags} tag={tag.text} id={tag._id} todoId={_id} />
+        {tags.length !== 0 && tags.map(tag => 
+            <Tags key={tag._id} tags={tags} tag={tag.text} id={tag._id} todoId={_id} />
         )}
         </List>
     );

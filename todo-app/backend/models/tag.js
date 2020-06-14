@@ -7,7 +7,7 @@ let Tag = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Todo'
     },
-    author: {
+    user: {
         id: {
             type: Schema.Types.ObjectId,
             ref: "User"

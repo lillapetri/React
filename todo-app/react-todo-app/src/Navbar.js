@@ -86,7 +86,8 @@ export default function BackToTop(props) {
             {isLoggedIn ? 
             <> 
             <Typography style={{padding: '0 1.5rem'}} color='inherit'>{name && `Welcome ${name}!`} </Typography>
-            <Button href='/todos' className={classes.menuButton} disableTouchRipple  color='inherit'>My todos</Button>
+            <Button href='/todos' className={classes.menuButton} disableTouchRipple  color='inherit'>Team tasks</Button> 
+            <Button href='/mytodos' className={classes.menuButton} disableTouchRipple  color='inherit'>My tasks</Button> 
             <Button className={classes.menuButton} color='inherit' disableTouchRipple onClick={logOut}>Log out</Button> 
             </>:
             <>

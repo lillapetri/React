@@ -24,6 +24,7 @@ class CreateTodo extends Component {
     }
     onSubmit(e){     
         const obj = Object.assign({}, this.state);
+        console.log(obj);
         apiCalls.createTodo(obj);
         console.log('Form submitted.');
         // reset input

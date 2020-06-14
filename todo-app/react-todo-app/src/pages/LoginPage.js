@@ -45,17 +45,14 @@ class Login extends Component {
 
   handleLogin = (e) => {
     e.preventDefault(); 
-    const headers = {
-      'x-auth-token': window.localStorage.getItem('token')
-    }
     let obj  = Object.assign({}, {
-      headers: headers,
       email: this.state.email,
       password: this.state.password
     })
     axios.post(API_URL + '/login', obj)
       .then(res => {if(res.status===200){
         localStorage.setItem('user', res.data.user.username);
+        localStorage.setItem('token', res.data.token);
         window.location = '/todos';
       }
     })

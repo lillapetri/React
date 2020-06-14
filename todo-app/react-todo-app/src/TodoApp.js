@@ -14,7 +14,7 @@ class TodoApp extends Component {
             searchTag: ''
         }
     } 
-    componentWillMount(){ 
+    componentDidMount(){ 
         this.loadTodos();
     }
     async loadTodos(){
@@ -60,7 +60,7 @@ class TodoApp extends Component {
     }
         
     render() {
-        const todos = this.state.todos.map( todo => (
+        const todos = this.state.todos && this.state.todos.map( todo => (
            
             <Todo
                 key={todo._id}

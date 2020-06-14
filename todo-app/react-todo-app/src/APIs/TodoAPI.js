@@ -1,15 +1,15 @@
 import axios from 'axios';
-const API_URL = 'http://localhost:4000/todos/';
+import {headers, username, privateRoute, API_URL} from './constants';
 
 // Populate todolist from database
 export async function getTodos(){
-  return axios.get(API_URL)
+  return axios.get(API_URL, headers)
   .then(response => {
       console.log('Data received from database.');
       return response.data;
   })
-  .catch(() => {
-      console.log('Error retreiving data.')
+  .catch((err) => {
+      console.log(err.message)
   })
 }
 
@@ -22,7 +22,7 @@ export async function getTodo(id){
 
 // Create new todo
 export async function createTodo(val){
-  return axios.post(API_URL, val)
+  return axios.post(API_URL, val, headers)
   .then(response => response.data)
   .catch(err => console.log(err));
 }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {headers} from './constants'
 export const API_URL = 'http://localhost:4000/index/';
 
 export function login(obj){
@@ -6,13 +7,9 @@ export function login(obj){
     email: obj.email,
     password: obj.password
   }
-  return axios.post(API_URL + '/login', data, {
-    headers: obj.headers
-  })
-  .then(res => {if(res.status === 200) {
-    console.log(res)
-    /* localStorage.setItem('user', res.data.user.username);
-    window.location = '/todos';  */}})
+  return axios.post(API_URL + '/login', data, headers)
+  .then(res => {if(res.status === 200) {    
+    console.log(res)}})
   .catch(err => console.log(err) )
 }
 
